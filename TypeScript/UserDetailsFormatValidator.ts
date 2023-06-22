@@ -15,7 +15,6 @@ export class UserDetailsFormatValidator {
         const allowedKeywords = ["userID", "nickName", "firstName", "lastName", "email", "profileImageUrl"];
 
         keywords.forEach((keyword) => {
-            // @ts-ignore
             if (allowedKeywords.indexOf(keyword) === -1) {
                 throw new IllegalArgumentError("Declared keyword=${" + keyword + "} is not allowed. The allowedKeywords allowed are: " + allowedKeywords);
             }

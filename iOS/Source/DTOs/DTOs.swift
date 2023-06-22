@@ -174,6 +174,8 @@ struct Region {
     let name: String
 }
 
+/// Video Module Tools
+///
 /// Define the tools to use
 // MARK: - Tools
 struct Tools {
