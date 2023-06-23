@@ -21,4 +21,13 @@ final class URL_FromStringTests: UnitTestCase {
 
         assertThrows(try URL.fromString(malformedUrlString), equalTo(VideoHybridNativeBridgeError.unableToInitializeURLError(urlString: malformedUrlString)))
     }
+
+    func testURLFromStringShouldReturnAURLInitializedUnsescapingProvidedString() throws {
+        let urlString = "\"https://www.kaleyra.com\""
+        let expected = "https://www.kaleyra.com"
+
+        let url = try URL.fromString(urlString)
+
+        assertThat(url.absoluteString, equalTo(expected))
+    }
 }

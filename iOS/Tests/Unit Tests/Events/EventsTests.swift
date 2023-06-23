@@ -8,6 +8,7 @@ import Hamcrest
 final class EventsTests: UnitTestCase {
 
     func testDescription() {
+        assertThat(Events.accessTokenRequest.description, equalTo("accessTokenRequest"))
         assertThat(Events.callError.description, equalTo("callError"))
         assertThat(Events.callModuleStatusChanged.description, equalTo("callModuleStatusChanged"))
         assertThat(Events.chatError.description, equalTo("chatError"))
@@ -20,7 +21,8 @@ final class EventsTests: UnitTestCase {
     func testCaseIterable() {
         let allEvents = Events.allCases
 
-        assertThat(allEvents, hasCount(7))
+        assertThat(allEvents, hasCount(8))
+        assertThat(allEvents.contains(Events.accessTokenRequest), isTrue())
         assertThat(allEvents.contains(Events.callError), isTrue())
         assertThat(allEvents.contains(Events.callModuleStatusChanged), isTrue())
         assertThat(allEvents.contains(Events.chatError), isTrue())
