@@ -304,13 +304,3 @@ extension UserDetails: Encodable {
         return String(data: data, encoding: .utf8)!
     }
 }
-
-@available(iOS 12.0, *)
-extension Array<UserDetails> {
-
-    func JSONEncoded() throws -> String {
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(self)
-        return String(data: data, encoding: .utf8)!
-    }
-}
