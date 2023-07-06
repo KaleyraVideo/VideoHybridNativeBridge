@@ -42,13 +42,13 @@ class KaleyraVideoNotificationService : JobIntentService() {
         val extras = intent.extras ?: return
         val payload = extras.getString("payload") ?: return
         try {
-            val bandyerPayload = JSONObject(payload).get("payload").toString()
-            val bandyerToken = JSONObject(payload).getString("user_token")
+            val webHookPayload = JSONObject(payload).get("payload").toString()
+            val userToken = JSONObject(payload).getString("user_token")
 
             val scope = CoroutineScope(Executors.newSingleThreadExecutor().asCoroutineDispatcher())
             val plugin = VideoSDKHybridBridge(
                 contextContainer = ServiceContextContainer(),
-                tokenProvider = SingleTokenProvider(bandyerToken),
+                tokenProvider = SingleTokenProvider(userToken),
                 backgroundScope = scope,
                 eventsReporter = NoOpEventsReporter(),
                 eventsEmitter = NoOpEventsEmitter(),
@@ -59,10 +59,10 @@ class KaleyraVideoNotificationService : JobIntentService() {
                 plugin.addUsersDetails(plugin.cachedUserDetails.toTypedArray())
                 plugin.configureBridge(savedConfiguration)
                 plugin.connect(savedUsed)
-                plugin.handlePushNotificationPayload(bandyerPayload)
+                plugin.handlePushNotificationPayload(webHookPayload)
             }
         } catch (exception: Throwable) {
-            Log.e("BandyerNotService", "" + exception.message)
+            Log.e("KaleyraNotService", "" + exception.message)
         }
     }
 

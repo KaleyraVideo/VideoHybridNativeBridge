@@ -11,9 +11,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-//import com.bandyer.flutter_plugin.exceptions.PluginNotificationKeyNotFound
-//import com.bandyer.flutter_plugin.exceptions.NotificationPayloadDataPathNotDefined
-//import com.bandyer.flutter_plugin.extensions.asJSONObject
 import org.json.JSONObject
 
 /**
@@ -36,20 +33,20 @@ class KaleyraVideoNotificationReceiver : BroadcastReceiver() {
             return
         }
 
-        // check if a bandyer notification service was defined in the manifest
-        val serviceIntent = Intent().setAction("com.bandyer.NotificationEvent").setPackage(context.packageName)
+        // check if a kaleyra video notification service was defined in the manifest
+        val serviceIntent = Intent().setAction("com.kaleyra.VideoNotificationEvent").setPackage(context.packageName)
         val resolveInfo = context.packageManager.queryIntentServices(serviceIntent, PackageManager.GET_RESOLVED_FILTER)
         if (resolveInfo.size < 1) return
 
-        val bandyerPayloadPath: String
+        val kaleyraVideoPayloadPath: String
         try {
-            bandyerPayloadPath = resolveInfo[0].filter.getDataPath(0).path
+            kaleyraVideoPayloadPath = resolveInfo[0].filter.getDataPath(0).path
         } catch (e: Throwable) {
-            throw Throwable("You have not defined data path in your intent-filter!! Bandyer requires it to know where to find the payload!")
+            throw Throwable("You have not defined data path in your intent-filter!! Kaleyra video requires it to know where to find the payload!")
         }
 
-        val payload = getBandyerPayload(intent, bandyerPayloadPath)
-        // if bandyer can handle payload proceed
+        val payload = getNotificationPayload(intent, kaleyraVideoPayloadPath)
+        // if kaleyra video can handle payload proceed
         if (payload == null) {
             resultCode = Activity.RESULT_OK
             return
@@ -66,32 +63,32 @@ class KaleyraVideoNotificationReceiver : BroadcastReceiver() {
         resultCode = Activity.RESULT_OK
     }
 
-    private fun getBandyerPayload(intent: Intent, bandyerPayloadPath: String): String? {
+    private fun getNotificationPayload(intent: Intent, notificationPayloadPath: String): String? {
         try {
-            val keyPath = bandyerPayloadPath.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val keyPath = notificationPayloadPath.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             val payload = intent.extras!!.asJSONObject()
-            if (!payload.toString().isBandyerNotification()) return null
+            if (!payload.toString().isKaleyraNotification()) return null
             if (!payload.has(keyPath[0]))
                 throw PluginNotificationKeyNotFound("\nRequired jsonObject:" + keyPath[0] + " is not contained in " + payload.keys().asString())
-            var bandyerData = payload.getString(keyPath[0])
+            var kaleyraPayloadData = payload.getString(keyPath[0])
             for (i in 1 until keyPath.size) {
-                val data = JSONObject(bandyerData)
+                val data = JSONObject(kaleyraPayloadData)
                 if (!data.has(keyPath[i]))
                     throw PluginNotificationKeyNotFound("\nRequired jsonObject:" + keyPath[i] + " is not contained in " + payload.keys().asString())
-                bandyerData = JSONObject(bandyerData).getString(keyPath[i])
+                kaleyraPayloadData = JSONObject(kaleyraPayloadData).getString(keyPath[i])
             }
-            return bandyerData
+            return kaleyraPayloadData
         } catch (e: Throwable) {
             if (e is PluginNotificationKeyNotFound) {
                 Log.w(
-                    "BandyerNotReceiver", "Failed to handle notification!!!" + e.message +
-                            "\nThis notification will not be handled by Bandyer!" +
-                            "\nBandyer payload not found in the following path: " + bandyerPayloadPath
+                    "KaleyraNotReceiver", "Failed to handle notification!!!" + e.message +
+                            "\nThis notification will not be handled by Kaleyra!" +
+                            "\nKaleyra payload not found in the following path: " + notificationPayloadPath
                 )
             } else
                 Log.w(
-                    "BandyerNotReceiver", "Failed to handle notification!!!" +
-                            "\nThis notification will not be handled by Bandyer!" +
+                    "KaleyraNotReceiver", "Failed to handle notification!!!" +
+                            "\nThis notification will not be handled by Kaleyra!" +
                             e.localizedMessage!!
                 )
         }
@@ -109,7 +106,7 @@ class KaleyraVideoNotificationReceiver : BroadcastReceiver() {
         return value.toString()
     }
 
-    private fun String.isBandyerNotification(): Boolean = contains("on_call_incoming") || contains("on_message_sent");
+    private fun String.isKaleyraNotification(): Boolean = contains("on_call_incoming") || contains("on_message_sent");
 
     private fun isGcmMessage(intent: Intent): Boolean {
         if (GCM_RECEIVE_ACTION == intent.action) {
