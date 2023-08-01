@@ -96,6 +96,14 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
         assertThat(BandyerSDK.logLevel, equalTo(.all))
     }
 
+    func testConfigureSDKShouldStartEventsReporter() throws {
+        let config = makeKaleyraVideoConfiguration()
+
+        try sut.configureSDK(config)
+
+        assertThat(sut.reporterSpy.startInvocations, hasCount(1))
+    }
+
     func testConfigureSDKShouldConfigureUIPresenter() throws {
         let audioOptions = makeAudioCallOptions()
         let videoOptions = makeCallOptions()
@@ -161,13 +169,6 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
 
         assertThat(sut.sdkSpy.connectInvocations, hasCount(1))
         assertThat(sut.sdkSpy.connectInvocations.first?.userId, presentAnd(equalTo("user_id")))
-    }
-    
-    func testConnectShouldStartEventReporter() throws {
-        try configureSUT()
-        try sut.connect(userID: "user_id")
-
-        assertThat(sut.reporterSpy.startInvocations, hasCount(1))
     }
 
     // MARK: - VoIP Push Token
@@ -257,11 +258,11 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
         assertThat(sut.sdkSpy.disconnectInvocations, hasCount(1))
     }
 
-    func testDisconnectShouldStopEventReporter() throws {
+    func testDisconnectShouldNotStopEventReporter() throws {
         try configureSUT()
         try sut.disconnect()
 
-        assertThat(sut.reporterSpy.stopInvocations, hasCount(1))
+        assertThat(sut.reporterSpy.stopInvocations, hasCount(0))
     }
 
     // MARK: - Add UsersDetails

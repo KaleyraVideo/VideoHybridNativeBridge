@@ -70,6 +70,8 @@ class VideoHybridNativeBridge {
         sdk.userDetailsProvider = UsersDetailsProvider(cache: usersCache, formatter: formatterProxy)
         sdk.configure(sdkConfig)
 
+        reporter.start()
+
         uiPresenter.configure(with: config.uiPresenterConfiguration())
     }
 
@@ -81,7 +83,6 @@ class VideoHybridNativeBridge {
 
     func connect(userID: String) throws {
         try checkIsConfigured()
-        reporter.start()
         let provider = accessTokenProviderFactory()
         sdk.connect(Bandyer.Session(userId: userID, tokenProvider: provider))
     }
@@ -118,7 +119,6 @@ class VideoHybridNativeBridge {
         try checkIsConfigured()
 
         sdk.disconnect()
-        reporter.stop()
     }
 
     func addUsersDetails(_ details: [UserDetails]) {
