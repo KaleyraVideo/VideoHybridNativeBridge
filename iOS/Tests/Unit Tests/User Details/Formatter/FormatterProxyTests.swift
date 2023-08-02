@@ -25,12 +25,12 @@ class FormatterProxyTests: UnitTestCase, UserDetailsFixtureFactory {
 
     // MARK: - Tests
 
-    func testStringForObjectValueShouldReturnAFormattedStringProvidedByTheFallbackFormatter() {
+    func testStringForObjectValueShouldReturnNilIfNoFormatterIsSet() {
         let item = makeItem(userID: "bob")
 
         let string = sut.string(for: item)
 
-        assertThat(string, equalTo(item.userID));
+        assertThat(string, nilValue());
     }
 
     func testStringForObjectValueShouldReturnAFormattedStringProvidedByTheProxeeFormatter() {
@@ -43,7 +43,7 @@ class FormatterProxyTests: UnitTestCase, UserDetailsFixtureFactory {
         assertThat(string, equalTo(realFormatter.string(for: item)))
     }
 
-    func testSetNilFormatterShouldSetDefaultFormatter() {
+    func testSetNilFormatterShouldRemovePreviouslyProvidedFormatter() {
         let realFormatter = UserDetailsFormatter(format: "${firstname} ${lastname}")
         sut.formatter = realFormatter;
 
@@ -51,6 +51,6 @@ class FormatterProxyTests: UnitTestCase, UserDetailsFixtureFactory {
 
         let item = makeItem(userID: "bob")
         let string = sut.string(for: item)
-        assertThat(string, equalTo(item.userID));
+        assertThat(string, nilValue());
     }
 }

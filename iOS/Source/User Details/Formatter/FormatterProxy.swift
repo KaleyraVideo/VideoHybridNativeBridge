@@ -6,42 +6,11 @@ import Foundation
 @available(iOS 12.0, *)
 class FormatterProxy: Formatter {
 
-    private static let defaultFormatter = UserDetailsFormatter(format: "${useralias}")
-
-    private let lock: Locking = NSRecursiveLock()
-    private var _formatter: Formatter
-
-    var formatter: Formatter! {
-        get {
-            lock.sync {
-                _formatter
-            }
-        }
-
-        set {
-            lock.sync {
-                guard newValue != nil else {
-                    _formatter = Self.defaultFormatter
-                    return
-                }
-
-                _formatter = newValue
-            }
-        }
-    }
-
-    override init() {
-        _formatter = Self.defaultFormatter
-        super.init()
-    }
-
-    required init?(coder: NSCoder) {
-        _formatter = Self.defaultFormatter
-        super.init(coder: coder)
-    }
+    @Atomic
+    var formatter: Formatter?
 
     override func string(for obj: Any?) -> String? {
-        formatter.string(for: obj)
+        formatter?.string(for: obj)
     }
 
 }
