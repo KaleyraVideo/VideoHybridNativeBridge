@@ -27,7 +27,7 @@
 		F9875C7529A661FC00A91C93 /* KaleyraVideoHybridNativeBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9875C6C29A661FC00A91C93 /* KaleyraVideoHybridNativeBridge.framework */; };
 		F9875C7B29A661FC00A91C93 /* KaleyraVideoHybridNativeBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = F9875C6F29A661FC00A91C93 /* KaleyraVideoHybridNativeBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9875CC129A663B300A91C93 /* MainQueueDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C8529A663B200A91C93 /* MainQueueDispatcher.swift */; };
-		F9875CC229A663B300A91C93 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C8629A663B200A91C93 /* Lock.swift */; };
+		F9875CC229A663B300A91C93 /* Locking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C8629A663B200A91C93 /* Locking.swift */; };
 		F9875CC329A663B300A91C93 /* DispatchQueue+isMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C8729A663B200A91C93 /* DispatchQueue+isMain.swift */; };
 		F9875CC429A663B300A91C93 /* DTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C8929A663B200A91C93 /* DTOs.swift */; };
 		F9875CC529A663B300A91C93 /* CallType+Bandyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C8A29A663B200A91C93 /* CallType+Bandyer.swift */; };
@@ -188,7 +188,7 @@
 		F9875C6F29A661FC00A91C93 /* KaleyraVideoHybridNativeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KaleyraVideoHybridNativeBridge.h; sourceTree = "<group>"; };
 		F9875C7429A661FC00A91C93 /* KaleyraVideoHybridNativeBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KaleyraVideoHybridNativeBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9875C8529A663B200A91C93 /* MainQueueDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainQueueDispatcher.swift; sourceTree = "<group>"; };
-		F9875C8629A663B200A91C93 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
+		F9875C8629A663B200A91C93 /* Locking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locking.swift; sourceTree = "<group>"; };
 		F9875C8729A663B200A91C93 /* DispatchQueue+isMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+isMain.swift"; sourceTree = "<group>"; };
 		F9875C8929A663B200A91C93 /* DTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTOs.swift; sourceTree = "<group>"; };
 		F9875C8A29A663B200A91C93 /* CallType+Bandyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CallType+Bandyer.swift"; sourceTree = "<group>"; };
@@ -441,7 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				F9875C8729A663B200A91C93 /* DispatchQueue+isMain.swift */,
-				F9875C8629A663B200A91C93 /* Lock.swift */,
+				F9875C8629A663B200A91C93 /* Locking.swift */,
 				F9875C8529A663B200A91C93 /* MainQueueDispatcher.swift */,
 				F9DEA4D929E83C840011D222 /* MainQueueRelay.swift */,
 			);
@@ -1018,7 +1018,7 @@
 				F96C93F729E8442F004FA995 /* UserInterfacePresenter+MainQueueRelay.swift in Sources */,
 				F9875CD829A663B300A91C93 /* AccessTokenRequest+Encodable.swift in Sources */,
 				F9875CE229A663B300A91C93 /* RecordingType+Decodable.swift in Sources */,
-				F9875CC229A663B300A91C93 /* Lock.swift in Sources */,
+				F9875CC229A663B300A91C93 /* Locking.swift in Sources */,
 				F9875CC929A663B300A91C93 /* CallType+Decodable.swift in Sources */,
 				F9875CD729A663B300A91C93 /* AccessTokenResponse+Decodable.swift in Sources */,
 				F9DEA4DA29E83C840011D222 /* MainQueueRelay.swift in Sources */,

@@ -8,7 +8,7 @@ class FormatterProxy: Formatter {
 
     private static let defaultFormatter = UserDetailsFormatter(format: "${useralias}")
 
-    private let lock: Lock = NSRecursiveLock()
+    private let lock: Locking = NSRecursiveLock()
     private var _formatter: Formatter
 
     var formatter: Formatter! {

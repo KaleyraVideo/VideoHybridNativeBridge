@@ -8,7 +8,7 @@ import Bandyer
 class UsersDetailsCache {
 
     private lazy var items = [String : Bandyer.UserDetails]()
-    private let lock: Lock = NSRecursiveLock()
+    private let lock: Locking = NSRecursiveLock()
 
     func setItem(_ item: Bandyer.UserDetails, forKey key: String) {
         lock.sync {

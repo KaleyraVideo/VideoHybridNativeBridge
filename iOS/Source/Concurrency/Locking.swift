@@ -3,12 +3,12 @@
 
 import Foundation
 
-protocol Lock {
+protocol Locking {
 
     func sync<T>(_ work: () throws -> T) rethrows -> T
 }
 
-extension Lock where Self: NSLocking {
+extension Locking where Self: NSLocking {
 
     func sync<T>(_ work: () throws -> T) rethrows -> T {
         lock()
@@ -17,5 +17,5 @@ extension Lock where Self: NSLocking {
     }
 }
 
-extension NSLock: Lock {}
-extension NSRecursiveLock: Lock {}
+extension NSLock: Locking {}
+extension NSRecursiveLock: Locking {}
