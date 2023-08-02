@@ -133,6 +133,8 @@
 		F9B7E5A929E5912700AB9208 /* CreateCallOptions+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E5A829E5912700AB9208 /* CreateCallOptions+Equatable.swift */; };
 		F9B7E5AB29E5913E00AB9208 /* CreateCallOptions+EquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E5AA29E5913E00AB9208 /* CreateCallOptions+EquatableTests.swift */; };
 		F9B7E5AE29E5A4BA00AB9208 /* CallWindowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E5AD29E5A4BA00AB9208 /* CallWindowProtocol.swift */; };
+		F9BEA4C02A7A9F940066988B /* AtomicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEA4BF2A7A9F940066988B /* AtomicTests.swift */; };
+		F9BEA4C22A7A9FA60066988B /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEA4C12A7A9FA60066988B /* Atomic.swift */; };
 		F9C6F96629DDBB610094DB30 /* CallDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6F96529DDBB610094DB30 /* CallDoubles.swift */; };
 		F9C6F96829DDBD980094DB30 /* CallRegistryDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6F96729DDBD980094DB30 /* CallRegistryDoubles.swift */; };
 		F9DEA4DA29E83C840011D222 /* MainQueueRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DEA4D929E83C840011D222 /* MainQueueRelay.swift */; };
@@ -294,6 +296,8 @@
 		F9B7E5A829E5912700AB9208 /* CreateCallOptions+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateCallOptions+Equatable.swift"; sourceTree = "<group>"; };
 		F9B7E5AA29E5913E00AB9208 /* CreateCallOptions+EquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateCallOptions+EquatableTests.swift"; sourceTree = "<group>"; };
 		F9B7E5AD29E5A4BA00AB9208 /* CallWindowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallWindowProtocol.swift; sourceTree = "<group>"; };
+		F9BEA4BF2A7A9F940066988B /* AtomicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicTests.swift; sourceTree = "<group>"; };
+		F9BEA4C12A7A9FA60066988B /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		F9C6F96529DDBB610094DB30 /* CallDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDoubles.swift; sourceTree = "<group>"; };
 		F9C6F96729DDBD980094DB30 /* CallRegistryDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRegistryDoubles.swift; sourceTree = "<group>"; };
 		F9DEA4D929E83C840011D222 /* MainQueueRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueRelay.swift; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 		F9875C8429A663B200A91C93 /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
+				F9BEA4C12A7A9FA60066988B /* Atomic.swift */,
 				F9875C8729A663B200A91C93 /* DispatchQueue+isMain.swift */,
 				F9875C8629A663B200A91C93 /* Locking.swift */,
 				F9875C8529A663B200A91C93 /* MainQueueDispatcher.swift */,
@@ -623,6 +628,7 @@
 		F9875D0229A6650A00A91C93 /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
+				F9BEA4BF2A7A9F940066988B /* AtomicTests.swift */,
 				F9875D0329A6650A00A91C93 /* DispatchQueue+isMainTests.swift */,
 				F9875D0429A6650A00A91C93 /* MainQueueDispatcherTests.swift */,
 				F9DEA4DB29E83F400011D222 /* MainQueueRelayTests.swift */,
@@ -1000,6 +1006,7 @@
 				F931C8B429DEF24600194E1D /* KaleyraVideoSDKUserInterfacePresenter.swift in Sources */,
 				F9875CC329A663B300A91C93 /* DispatchQueue+isMain.swift in Sources */,
 				F9875CE729A663B300A91C93 /* ChatClientEventsReporter.swift in Sources */,
+				F9BEA4C22A7A9FA60066988B /* Atomic.swift in Sources */,
 				F9B7E59929E5602800AB9208 /* CallOptions+Bandyer.swift in Sources */,
 				F967342529D2EFE500F9B914 /* TokenProvider.swift in Sources */,
 				F9875CDE29A663B300A91C93 /* Array+JSON.swift in Sources */,
@@ -1100,6 +1107,7 @@
 				F9875D3429A6650A00A91C93 /* CreateCallOptions+IntentTests.swift in Sources */,
 				F9B7E5A129E5663900AB9208 /* AudioCallOptions+EquatableTests.swift in Sources */,
 				F9875D5329A6650A00A91C93 /* TestHelpers.swift in Sources */,
+				F9BEA4C02A7A9F940066988B /* AtomicTests.swift in Sources */,
 				F9875D5729A6650A00A91C93 /* UnitTestCase.swift in Sources */,
 				F9B7E5A729E5888E00AB9208 /* KaleyraVideoConfiguration+UserInterfacePresenterConfigurationTests.swift in Sources */,
 				F9875D3E29A6650A00A91C93 /* RegionTests.swift in Sources */,
