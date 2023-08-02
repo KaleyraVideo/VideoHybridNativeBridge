@@ -6,7 +6,7 @@ platform :ios, '10.0'
 target 'KaleyraVideoHybridNativeBridge' do
   use_frameworks!
 
-  pod "Bandyer", "3.6.2"
+  pod "Bandyer"
 
   target 'KaleyraVideoHybridNativeBridgeTests' do
     use_frameworks!
