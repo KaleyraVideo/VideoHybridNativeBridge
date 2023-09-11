@@ -28,20 +28,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 31
+  compileSdkVersion project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 33
 
   defaultConfig {
-    minSdkVersion 21
+    minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 22
     testInstrumentationRunner "com.kaleyra.video_hybrid_native_bridge.utils.RandomRunner"
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
-  kotlinOptions {
-    jvmTarget = '1.8'
   }
 
   sourceSets {
