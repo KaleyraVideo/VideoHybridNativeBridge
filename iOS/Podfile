@@ -1,7 +1,7 @@
 # Copyright © 2018-2023 Kaleyra S.p.a. All Rights Reserved.
 # See LICENSE for licensing information
 
-platform :ios, '10.0'
+platform :ios, '12.0'
 
 target 'KaleyraVideoHybridNativeBridge' do
   use_frameworks!
