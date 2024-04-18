@@ -33,10 +33,10 @@ jobs:
         with:
           token: ${{steps.generate_token.outputs.token}}
       - name: "Update the android version"
-        if: ${{ github.event.input.platform == 'android' }}
+        if: ${{ github.event.inputs.platform == 'android' }}
         run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
       - name: "Update the ios version"
-        if: ${{ github.event.input.platform == 'ios' }}
+        if: ${{ github.event.inputs.platform == 'ios' }}
         run: |
             sed -i "s/pod 'Bandyer', '~> [0-9]*\.[0-9]*\.[0-9]*-*\w*'/ pod 'Bandyer', '~> "${{ github.event.inputs.release_version }}"'/g" ./ios/Podfile
             cd ios
