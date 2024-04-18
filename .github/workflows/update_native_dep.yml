@@ -34,7 +34,7 @@ jobs:
         run: |
             sed -i "s/pod 'Bandyer', '~> [0-9]*\.[0-9]*\.[0-9]*-*\w*'/ pod 'Bandyer', '~> "${{ github.event.inputs.release_version }}"'/g" ./ios/Podfile
             cd ios
-            pod install
+            pod install --repo-update
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
