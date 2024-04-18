@@ -35,17 +35,11 @@ jobs:
           token: ${{steps.generate_token.outputs.token}}
       - name: "Update the android version"
         run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v6
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          token: ${{steps.generate_token.outputs.token}}
-          commit-message: 'chore: Update android native version'
-          branch: prepare_release_native
-          title: 'Update native dependency'
-          delete-branch: true
-          labels: |
-              ${{ github.event.inputs.release_type }}
+          commit_message: "chore: Update android sdk version"
+          tagging_message: android-v${{ github.event.inputs.release_version }}
+
   update_ios_native_version:
     if: ${{ github.event.inputs.platform == 'ios' }}
     runs-on: macos-latest
@@ -64,6 +58,14 @@ jobs:
             sed -i '' "s/pod 'Bandyer', '~> [0-9]*\.[0-9]*\.[0-9]*-*\w*'/ pod 'Bandyer', '~> "${{ github.event.inputs.release_version }}"'/g" ./iOS/Podfile
             cd iOS
             pod install --repo-update
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: Update ios sdk version"
+          tagging_message: ios-v${{ github.event.inputs.release_version }}
+  
+  create_pull_request:
+    runs-on: ubuntu-latest
+    steps:
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
@@ -71,6 +73,7 @@ jobs:
           token: ${{steps.generate_token.outputs.token}}
           commit-message: 'chore: Update ios native version'
           branch: prepare_release_native
+          base: main
           title: 'Update native dependency'
           delete-branch: true
           labels: |
