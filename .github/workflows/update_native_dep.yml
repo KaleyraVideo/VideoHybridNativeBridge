@@ -37,6 +37,7 @@ jobs:
         run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
+          branch: update_native
           commit_message: "chore: Update android sdk version"
           tagging_message: android-v${{ github.event.inputs.release_version }}
 
@@ -60,6 +61,7 @@ jobs:
             pod install --repo-update
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
+          branch: update_native
           commit_message: "chore: Update ios sdk version"
           tagging_message: ios-v${{ github.event.inputs.release_version }}
   
@@ -77,12 +79,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{steps.generate_token.outputs.token}}
+      - name: Reset update_native branch
+        run: |
+          git fetch origin update_native:update_native
+          git reset --hard update_native
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{steps.generate_token.outputs.token}}
-          commit-message: 'chore: Update ios native version'
+          commit-message: 'chore: Update native version'
           branch: prepare_release_native
           title: 'Update native dependency'
           labels: |
