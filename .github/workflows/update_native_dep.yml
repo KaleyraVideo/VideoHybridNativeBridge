@@ -74,6 +74,9 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          token: ${{steps.generate_token.outputs.token}}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
@@ -81,7 +84,6 @@ jobs:
           token: ${{steps.generate_token.outputs.token}}
           commit-message: 'chore: Update ios native version'
           branch: prepare_release_native
-          base: main
           title: 'Update native dependency'
           delete-branch: true
           labels: |
