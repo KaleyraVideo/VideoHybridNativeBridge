@@ -37,6 +37,7 @@ jobs:
         run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
+          create_branch: true
           branch: update_native
           commit_message: "chore: Update android sdk version"
           tagging_message: android-v${{ github.event.inputs.release_version }}
@@ -62,6 +63,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: update_native
+          create_branch: true
           commit_message: "chore: Update ios sdk version"
           tagging_message: ios-v${{ github.event.inputs.release_version }}
   
