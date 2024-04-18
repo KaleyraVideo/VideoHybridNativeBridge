@@ -20,7 +20,23 @@ on:
           - android
           - ios
 jobs:
+  create_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+            GITHUB_TOKEN: ${{steps.generate_token.outputs.token}}
+        with:
+            branch: 'update_native'
+
   update_android_native_version:
+    needs: create_branch
     if: ${{ github.event.inputs.platform == 'android' }}
     runs-on: ubuntu-latest
     steps:
@@ -32,17 +48,17 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
+          ref: update_native
           token: ${{steps.generate_token.outputs.token}}
       - name: "Update the android version"
         run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          create_branch: true
-          branch: update_native
           commit_message: "chore: Update android sdk version"
           tagging_message: android-v${{ github.event.inputs.release_version }}
 
   update_ios_native_version:
+    needs: create_branch
     if: ${{ github.event.inputs.platform == 'ios' }}
     runs-on: macos-latest
     steps:
@@ -54,6 +70,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
+          ref: update_native
           token: ${{steps.generate_token.outputs.token}}
       - name: "Update the ios version"
         run: |
@@ -62,8 +79,6 @@ jobs:
             pod install --repo-update
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: update_native
-          create_branch: true
           commit_message: "chore: Update ios sdk version"
           tagging_message: ios-v${{ github.event.inputs.release_version }}
   
