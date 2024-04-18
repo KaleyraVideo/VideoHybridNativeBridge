@@ -5,11 +5,17 @@ on:
     inputs:
       release_version:
         description: Define the specific release version?
-        required: false
+        required: true
+      release_type:
+        description: Specify the release type
+        required: true
+        options:
+          - minor
+          - patch
       platform:
         type: choice
         description: Specify the platform to be updated
-        required: false
+        required: true
         options:
           - android
           - ios
@@ -41,6 +47,8 @@ jobs:
         with:
           token: ${{steps.generate_token.outputs.token}}
           commit-message: 'chore: Update native version'
-          branch: update_native
-          delete-branch: true
+          branch: prepare_release_native
           title: 'Update native dependency'
+          delete-branch: true
+          labels: |
+              ${{ github.event.inputs.release_type }}
