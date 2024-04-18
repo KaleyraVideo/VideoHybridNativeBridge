@@ -1,0 +1,46 @@
+name: Update native version used
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: Define the specific release version?
+        required: false
+      platform:
+        type: choice
+        description: Specify the platform to be updated
+        required: false
+        options:
+          - android
+          - ios
+jobs:
+  update_native_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          token: ${{steps.generate_token.outputs.token}}
+      - name: "Update the android version"
+        if: github.event.input.platform == "android"
+        run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
+      - name: "Update the ios version"
+        if: github.event.input.platform == "ios"
+        run: |
+            sed -i "s/pod 'Bandyer', '~> [0-9]*\.[0-9]*\.[0-9]*-*\w*'/ pod 'Bandyer', '~> "${{ github.event.inputs.release_version }}"'/g" ./ios/Podfile
+            cd ios
+            pod install
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{steps.generate_token.outputs.token}}
+          commit-message: 'chore: Update native version'
+          branch: update_native
+          delete-branch: true
+          title: 'Update native dependency'
