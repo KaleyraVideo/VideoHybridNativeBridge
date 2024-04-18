@@ -66,6 +66,7 @@ jobs:
   create_pull_request:
     runs-on: ubuntu-latest
     needs: [update_android_native_version, update_ios_native_version]
+    if: ${{ always() && !cancelled() && !contains(needs.*.result, 'failure') }}
     steps:
       - name: Generate a token
         id: generate_token
