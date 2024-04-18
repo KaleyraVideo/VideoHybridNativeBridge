@@ -3,11 +3,11 @@ name: Release hybrid
 on:
   pull_request:
     branches:
-      - prepare_release_native
+      - main
     types: [closed]
 jobs:
     release_flutter:
-      if: github.event.pull_request.merged == true
+      if: github.head_ref == 'prepare_release_native' && github.event.pull_request.merged == true
       runs-on: ubuntu-latest
       steps:
           - name: Generate a token
