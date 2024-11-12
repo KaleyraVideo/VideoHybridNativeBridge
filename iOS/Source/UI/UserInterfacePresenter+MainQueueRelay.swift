@@ -3,7 +3,7 @@
 
 import Foundation
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 extension MainQueueRelay: UserInterfacePresenter where Decoratee: UserInterfacePresenter {
 
     func configure(with configuration: UserInterfacePresenterConfiguration) {

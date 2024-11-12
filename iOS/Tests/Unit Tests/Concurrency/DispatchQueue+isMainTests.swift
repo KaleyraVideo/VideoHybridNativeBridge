@@ -5,7 +5,7 @@ import Foundation
 import Hamcrest
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 final class DispatchQueue_isMainTests: UnitTestCase {
 
     func testIsMainShouldReturnTrueWhenRunningOnMainQueue() {

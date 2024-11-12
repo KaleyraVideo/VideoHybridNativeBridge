@@ -5,7 +5,7 @@ import Foundation
 import Hamcrest
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 final class MainQueueRelayTests: UnitTestCase {
 
     func testDispatchesOperationOnMainQueueWhenCalledFromABackgroundQueue() {
@@ -62,7 +62,7 @@ private struct Actuator: JobHandler {
     }
 }
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 extension MainQueueRelay: JobHandler where Decoratee == Actuator {
 
     func job(_ completion: @escaping (String) -> Void) {

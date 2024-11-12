@@ -2,12 +2,12 @@
 // See LICENSE for licensing information
 
 import Foundation
-import Bandyer
+import KaleyraVideoSDK
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 extension Region {
 
-    var bandyerRegion: Bandyer.Region? {
+    var kaleyraRegion: KaleyraVideoSDK.Region? {
         switch name.lowercased() {
             case "europe", "eu":
                 return .europe

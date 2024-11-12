@@ -5,7 +5,7 @@ import XCTest
 import Hamcrest
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 final class AtomicTests: UnitTestCase {
 
     private var lock: FakeLock!
@@ -282,7 +282,7 @@ final class AtomicTests: UnitTestCase {
     }
 }
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 private class FakeLock: Locking {
 
     enum Invocation: CustomStringConvertible, Equatable {

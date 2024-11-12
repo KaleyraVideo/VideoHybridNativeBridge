@@ -4,7 +4,7 @@
 import Foundation
 import UIKit
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 class WindowViewControllerPresenter: ViewControllerPresenter {
 
     // MARK: - Nested Types

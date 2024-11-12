@@ -2,9 +2,9 @@
 // See LICENSE for licensing information
 
 import Foundation
-import Bandyer
+import KaleyraVideoSDK
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 enum ClientState: String {
     case stopped = "stopped"
     case connecting = "connecting"
@@ -14,48 +14,23 @@ enum ClientState: String {
     case failed = "failed"
 }
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 extension ClientState {
 
-    init?(clientState: CallClientState) {
-        switch clientState {
-            case .stopped:
-                self = .stopped
-            case .starting:
+    init?(state: KaleyraVideoSDK.ClientState) {
+        switch state {
+            case .disconnected(error: let error):
+                if error != nil {
+                    self = .failed
+                } else {
+                    self = .stopped
+                }
+            case .connecting:
                 self = .connecting
-            case .running:
+            case .connected:
                 self = .ready
-            case .resuming:
-                self = .connecting
-            case .paused:
-                self = .paused
             case .reconnecting:
                 self = .reconnecting
-            case .failed:
-                self = .failed
-            default:
-                return nil
-        }
-    }
-
-    init?(clientState: ChatClientState) {
-        switch clientState {
-            case .stopped:
-                self = .stopped
-            case .starting:
-                self = .connecting
-            case .running:
-                self = .ready
-            case .resuming:
-                self = .connecting
-            case .paused:
-                self = .paused
-            case .reconnecting:
-                self = .reconnecting
-            case .failed:
-                self = .failed
-            default:
-                return nil
         }
     }
 }

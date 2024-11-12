@@ -3,10 +3,10 @@
 
 import Foundation
 import Hamcrest
-import Bandyer
+import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 final class EventsReporterTests: UnitTestCase {
 
     // MARK: - Start
@@ -60,15 +60,11 @@ final class EventsReporterTests: UnitTestCase {
         .init()
     }
 
-    private func makeCallClientStub() -> CallClientStub {
+    private func makeChatClientStub() -> ConversationStub {
         .init()
     }
 
-    private func makeChatClientStub() -> ChatClientStub {
-        .init()
-    }
-
-    private func makeSdkDummy() -> BandyerSDKProtocolDummy {
+    private func makeSdkDummy() -> KaleyraVideoSDKProtocolDummy {
         .init()
     }
 }

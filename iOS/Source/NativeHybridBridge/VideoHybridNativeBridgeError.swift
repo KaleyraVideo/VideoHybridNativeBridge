@@ -3,7 +3,7 @@
 
 import Foundation
 
-@available(iOS 12.0, *)
+@available(iOS 15.0, *)
 struct VideoHybridNativeBridgeError: Error, Equatable {
 
     private enum ErrorCodes: String {
