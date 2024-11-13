@@ -6,7 +6,6 @@ import Hamcrest
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 final class EventsReporterTests: UnitTestCase {
 
     // MARK: - Start

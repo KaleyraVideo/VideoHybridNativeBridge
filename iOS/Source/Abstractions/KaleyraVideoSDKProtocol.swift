@@ -4,7 +4,6 @@
 import Foundation
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 protocol KaleyraVideoSDKProtocol: AnyObject {
 
     var config: KaleyraVideoSDK.Config? { get }
@@ -18,5 +17,4 @@ protocol KaleyraVideoSDKProtocol: AnyObject {
     func reset()
 }
 
-@available(iOS 15.0, *)
 extension KaleyraVideo: KaleyraVideoSDKProtocol {}

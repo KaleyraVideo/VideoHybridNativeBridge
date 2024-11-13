@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(iOS 15.0, *)
 extension URL {
 
     static func fromString(_ string: String) throws -> URL {
@@ -14,7 +13,6 @@ extension URL {
     }
 }
 
-@available(iOS 15.0, *)
 private extension String {
 
     func unescape() -> String {

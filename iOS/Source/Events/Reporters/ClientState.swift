@@ -4,7 +4,6 @@
 import Foundation
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 enum ClientState: String {
     case stopped = "stopped"
     case connecting = "connecting"
@@ -14,7 +13,6 @@ enum ClientState: String {
     case failed = "failed"
 }
 
-@available(iOS 15.0, *)
 extension ClientState {
 
     init?(state: KaleyraVideoSDK.ClientState) {

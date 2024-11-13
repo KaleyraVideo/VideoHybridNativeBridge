@@ -5,7 +5,6 @@ import Foundation
 import Combine
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 class CallDummy: NSObject, KaleyraVideoSDK.Call {
 
     let id: UUID = .init()
@@ -47,7 +46,6 @@ class CallDummy: NSObject, KaleyraVideoSDK.Call {
     func end(completion: @escaping (Result<Void, any Error>) -> Void) {}
 }
 
-@available(iOS 15.0, *)
 private class CallParticipantsDummy: NSObject, KaleyraVideoSDK.CallParticipants {
 
     var all: [any KaleyraVideoSDK.CallParticipant] = []
@@ -57,7 +55,6 @@ private class CallParticipantsDummy: NSObject, KaleyraVideoSDK.CallParticipants 
     var callees: [any KaleyraVideoSDK.CallParticipant] = []
 }
 
-@available(iOS 15.0, *)
 private class CallParticipantDummy: NSObject, KaleyraVideoSDK.CallParticipant {
 
     var userId: String = ""

@@ -5,7 +5,6 @@ import Foundation
 import Combine
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 class ConversationStub: NSObject, Conversation {
 
     var state: KaleyraVideoSDK.ClientState = .disconnected(error: nil) {
@@ -33,7 +32,6 @@ class ConversationStub: NSObject, Conversation {
     }
 }
 
-@available(iOS 15.0, *)
 class InAppNotificationsSpy: InAppNotifications {
 
     var delegate: (any KaleyraVideoSDK.InAppNotificationsDelegate)?

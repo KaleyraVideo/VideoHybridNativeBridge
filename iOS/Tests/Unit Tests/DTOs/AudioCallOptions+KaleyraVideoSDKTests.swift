@@ -6,7 +6,6 @@ import Hamcrest
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 class AudioCallOptions_KaleyraVideoSDKTests: UnitTestCase {
 
     func testMakeCallOptions() {

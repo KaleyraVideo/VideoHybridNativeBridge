@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(iOS 15.0, *)
 protocol UserInterfacePresenter {
 
     func configure(with configuration: UserInterfacePresenterConfiguration)

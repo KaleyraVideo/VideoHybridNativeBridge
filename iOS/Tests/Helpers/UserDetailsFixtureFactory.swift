@@ -5,13 +5,11 @@ import Foundation
 import CallKit
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 protocol UserDetailsFixtureFactory {
 
     func makeItem(userID: String, name: String?, image: URL?, handle: CXHandle?) -> KaleyraVideoSDK.UserDetails
 }
 
-@available(iOS 15.0, *)
 extension UserDetailsFixtureFactory {
 
     func makeItem(userID: String, name: String? = nil, image: URL? = nil, handle: CXHandle? = nil) -> KaleyraVideoSDK.UserDetails {

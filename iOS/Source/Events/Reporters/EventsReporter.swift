@@ -4,7 +4,6 @@
 import Foundation
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 protocol SDKEventReporter {
 
     var lastVoIPToken: String? { get }
@@ -13,7 +12,6 @@ protocol SDKEventReporter {
     func stop()
 }
 
-@available(iOS 15.0, *)
 class EventsReporter: SDKEventReporter {
 
     // MARK: - Properties

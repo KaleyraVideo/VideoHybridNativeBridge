@@ -5,7 +5,6 @@ import Foundation
 import Combine
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 class ChatClientEventsReporter: NSObject {
 
     private let conversation: Conversation

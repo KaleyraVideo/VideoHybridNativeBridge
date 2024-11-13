@@ -7,7 +7,6 @@ import KaleyraVideoSDK
 import Combine
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 class CallClientEventsReporterTests: UnitTestCase {
 
     private let statusChangedEvent = "callModuleStatusChanged"

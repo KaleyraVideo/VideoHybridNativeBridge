@@ -4,7 +4,6 @@
 import Foundation
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 extension CallType {
 
     var bandyerType: KaleyraVideoSDK.CallOptions.CallType {

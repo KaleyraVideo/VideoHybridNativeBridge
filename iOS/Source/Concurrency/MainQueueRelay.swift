@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(iOS 15.0, *)
 final class MainQueueRelay<Decoratee> {
 
     let decoratee: Decoratee

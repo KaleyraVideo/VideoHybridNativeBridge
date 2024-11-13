@@ -6,7 +6,6 @@ import Combine
 import PushKit
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 class ConferenceStub: Conference {
 
     var state: KaleyraVideoSDK.ClientState = .disconnected(error: nil) {

@@ -5,7 +5,6 @@ import Foundation
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 class KaleyraVideoSDKProtocolSpy: KaleyraVideoSDKProtocol {
 
     private(set) var config: KaleyraVideoSDK.Config?
@@ -49,7 +48,6 @@ class KaleyraVideoSDKProtocolSpy: KaleyraVideoSDKProtocol {
     }
 }
 
-@available(iOS 15.0, *)
 class KaleyraVideoSDKProtocolDummy: KaleyraVideoSDKProtocol {
 
     var config: KaleyraVideoSDK.Config?

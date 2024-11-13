@@ -6,7 +6,6 @@ import Hamcrest
 import PushKit
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 final class KaleyraVideoConfiguration_KaleyraVideoSDKTests: UnitTestCase {
 
     func testBandyerPluginConfigurationDefaultIsCallkitEnabled() {

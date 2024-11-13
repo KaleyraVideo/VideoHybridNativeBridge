@@ -6,7 +6,6 @@ import UIKit
 import KaleyraVideoSDK
 import PushKit
 
-@available(iOS 15.0, *)
 extension KaleyraVideoConfiguration {
 
     private enum ConfigurationError: Error {
@@ -48,7 +47,6 @@ extension KaleyraVideoConfiguration {
     }
 }
 
-@available(iOS 15.0, *)
 private extension IosConfiguration {
 
     func makeCallKitConfiguration() -> KaleyraVideoSDK.Config.CallKitIntegration {
@@ -78,7 +76,6 @@ private extension IosConfiguration {
     }
 }
 
-@available(iOS 15.0, *)
 private extension Tools {
 
     func makeChatConfiguration() -> KaleyraVideoSDK.ConferenceSettings.Tools.Chat {

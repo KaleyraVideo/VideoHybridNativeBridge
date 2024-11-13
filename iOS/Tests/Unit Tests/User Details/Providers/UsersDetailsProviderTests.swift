@@ -7,7 +7,6 @@ import Hamcrest
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 class UsersDetailsProviderTests: UnitTestCase {
 
     private let alice = UserDetails(userId: "alice", name: "Alice Appleseed")

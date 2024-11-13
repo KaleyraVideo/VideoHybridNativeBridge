@@ -5,7 +5,6 @@ import Foundation
 import Combine
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 struct UserInterfacePresenterConfiguration: Equatable {
 
     enum ChatAudioButtonConfiguration: Equatable {
@@ -33,7 +32,6 @@ struct UserInterfacePresenterConfiguration: Equatable {
     }
 }
 
-@available(iOS 15.0, *)
 class KaleyraVideoSDKUserInterfacePresenter: NSObject, UserInterfacePresenter {
 
     // MARK: - Properties
@@ -181,7 +179,6 @@ extension KaleyraVideoSDKUserInterfacePresenter: CallViewControllerDelegate {
 
 // MARK: - InAppChatNotificationTouchListener
 
-@available(iOS 15.0, *)
 extension KaleyraVideoSDKUserInterfacePresenter: InAppNotificationsDelegate {
 
     func onTouch(_ notification: ChatNotification) {
@@ -192,7 +189,6 @@ extension KaleyraVideoSDKUserInterfacePresenter: InAppNotificationsDelegate {
 
 // MARK: - ChannelViewControllerDelegate
 
-@available(iOS 15.0, *)
 extension KaleyraVideoSDKUserInterfacePresenter: ChatViewControllerDelegate {
 
     func chatViewControllerDidFinish(_ controller: KaleyraVideoSDK.ChatViewController) {

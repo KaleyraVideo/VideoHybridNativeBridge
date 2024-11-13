@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(iOS 15.0, *)
 public enum MainQueueDispatcher {
 
     public static func perform(_ work: @escaping () -> Void) {

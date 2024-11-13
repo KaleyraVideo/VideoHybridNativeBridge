@@ -6,7 +6,6 @@ import KaleyraVideoSDK
 import Hamcrest
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 class CallTypeTests: UnitTestCase {
 
     func testBandyerCallType() {

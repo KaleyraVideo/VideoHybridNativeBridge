@@ -6,7 +6,6 @@ import Hamcrest
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
 
     private var sdkSpy: KaleyraVideoSDKProtocolSpy!
@@ -250,7 +249,6 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
     }
 }
 
-@available(iOS 15.0, *)
 private class ViewControllerPresenterSpy: ViewControllerPresenter {
 
     private(set) var isPresenting: Bool = false
@@ -285,7 +283,6 @@ private class ViewControllerPresenterSpy: ViewControllerPresenter {
     }
 }
 
-@available(iOS 15.0, *)
 private class CallWindowSpy: CallWindowProtocol {
 
     var isHidden: Bool = false

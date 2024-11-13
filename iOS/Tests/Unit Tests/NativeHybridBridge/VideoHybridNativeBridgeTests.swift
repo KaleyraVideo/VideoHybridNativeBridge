@@ -7,7 +7,6 @@ import KaleyraVideoSDK
 import PushKit
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 final class VideoHybridNativeBridgeTests: UnitTestCase {
 
     private var sut: VideoHybridNativeBridgeSpy!
@@ -331,7 +330,6 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
     }
 }
 
-@available(iOS 15.0, *)
 private class AccessTokenProviderFactorySpy {
 
     private(set) var madeAccessTokenProviders = [AccessTokenProviderStub]()
@@ -343,7 +341,6 @@ private class AccessTokenProviderFactorySpy {
     }
 }
 
-@available(iOS 15.0, *)
 private class VideoHybridNativeBridgeSpy: VideoHybridNativeBridge {
 
     let sdkSpy: KaleyraVideoSDKProtocolSpy = .init()
@@ -362,7 +359,6 @@ private class VideoHybridNativeBridgeSpy: VideoHybridNativeBridge {
     }
 }
 
-@available(iOS 15.0, *)
 private class VideoHybridNativeBridgeInitSpy: VideoHybridNativeBridge {
 
     let uiPresenter: UserInterfacePresenter
@@ -383,7 +379,6 @@ private class VideoHybridNativeBridgeInitSpy: VideoHybridNativeBridge {
     }
 }
 
-@available(iOS 15.0, *)
 private class SDKEventReporterSpy: SDKEventReporter {
 
     private(set) var startInvocations: [()] = []
@@ -404,13 +399,11 @@ private class SDKEventReporterSpy: SDKEventReporter {
     }
 }
 
-@available(iOS 15.0, *)
 private class AccessTokenProviderStub: AccessTokenProvider {
 
     func provideAccessToken(userId: String, completion: @escaping (Result<String, Error>) -> Void) {}
 }
 
-@available(iOS 15.0, *)
 private class UsersDetailsCacheSpy: UsersDetailsCache {
 
     private(set) var setItemsInvocations = [[KaleyraVideoSDK.UserDetails]]()

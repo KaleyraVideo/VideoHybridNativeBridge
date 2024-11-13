@@ -4,7 +4,6 @@
 import Foundation
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 protocol CallWindowProtocol: AnyObject {
 
     var isHidden: Bool { get set }
@@ -13,5 +12,4 @@ protocol CallWindowProtocol: AnyObject {
     func set(rootViewController controller: UIViewController?, animated: Bool, completion: ((Bool) -> Void)?)
 }
 
-@available(iOS 15.0, *)
 extension CallWindow: CallWindowProtocol {}

@@ -5,7 +5,6 @@ import Foundation
 import CallKit
 import KaleyraVideoSDK
 
-@available(iOS 15.0, *)
 class UsersDetailsProvider: NSObject, UserDetailsProvider {
 
     private let cache: UsersDetailsCache

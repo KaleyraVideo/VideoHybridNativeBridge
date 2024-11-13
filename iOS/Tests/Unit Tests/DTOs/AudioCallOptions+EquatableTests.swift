@@ -6,7 +6,6 @@ import Hamcrest
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 final class AudioCallOptions_EquatableTests: UnitTestCase {
 
     func testEquatable() {

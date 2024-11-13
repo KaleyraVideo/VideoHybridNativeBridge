@@ -5,7 +5,6 @@ import Foundation
 import Hamcrest
 @testable import KaleyraVideoHybridNativeBridge
 
-@available(iOS 15.0, *)
 final class VideoHybridNativeBridgeErrorTests: UnitTestCase {
 
     func testUnsupportedFunctionCallError() {
