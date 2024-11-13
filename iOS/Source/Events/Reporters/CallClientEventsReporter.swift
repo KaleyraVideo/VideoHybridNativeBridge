@@ -14,7 +14,7 @@ class CallClientEventsReporter: NSObject {
     private var cancellables = Set<AnyCancellable>()
 
     var isRunning: Bool {
-        cancellables.isEmpty
+        !cancellables.isEmpty
     }
 
     init(conference: Conference, emitter: EventEmitter) {
@@ -23,14 +23,14 @@ class CallClientEventsReporter: NSObject {
         super.init()
     }
 
-    func start() {
+    func start<S: Scheduler>(scheduler: S = DispatchQueue.main) {
         guard !isRunning else { return }
 
-        conference.statePublisher.dropFirst().receive(on: DispatchQueue.main).sink { [weak self] _ in
+        conference.statePublisher.dropFirst().receive(on: scheduler).sink { [weak self] _ in
             self?.notifyNewClientState()
         }.store(in: &cancellables)
 
-        conference.voipCredentialsPublisher.receive(on: DispatchQueue.main).sink { [weak self] credentials in
+        conference.voipCredentialsPublisher.receive(on: scheduler).sink { [weak self] credentials in
             self?.notifyNewCredentials(credentials)
         }.store(in: &cancellables)
     }
@@ -47,18 +47,20 @@ class CallClientEventsReporter: NSObject {
         notifyErrorIfNeeded()
 
         guard let clientState = ClientState(state: conference.state) else { return }
-        emitter.sendEvent(Events.chatModuleStatusChanged, args: clientState.rawValue)
+        emitter.sendEvent(Events.callModuleStatusChanged, args: clientState.rawValue)
     }
 
     private func notifyErrorIfNeeded() {
         guard case KaleyraVideoSDK.ClientState.disconnected(error: let error) = conference.state, let error else { return }
-        emitter.sendEvent(Events.chatError, args: error.localizedDescription)
+        emitter.sendEvent(Events.callError, args: error.localizedDescription)
     }
 
     // MARK: - VoIP Credentials
 
     private func notifyNewCredentials(_ credentials: VoIPCredentials?) {
         guard let credentials else {
+            guard lastVoIPToken != nil else { return }
+
             emitter.sendEvent(.iOSVoipPushTokenInvalidated, args: nil)
             lastVoIPToken = nil
             return

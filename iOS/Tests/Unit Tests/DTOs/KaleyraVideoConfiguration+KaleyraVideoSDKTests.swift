@@ -53,14 +53,6 @@ final class KaleyraVideoConfiguration_KaleyraVideoSDKTests: UnitTestCase {
         assertThat(bandyerConf.voip.isAutomatic, isFalse())
     }
 
-    func testIosConfigurationMakeVoipConfigurationWithNilRegistryDelegate() throws {
-        let conf = makeKaleyraVideoPluginConfiguration()
-
-        let bandyerConf = try conf.makeKaleyraVideoSDKConfig()
-
-        assertThat(bandyerConf.voip.isAutomatic, isFalse())
-    }
-
     func testIosConfigurationMakeVoipConfigurationWithAutomaticStrategyAndRegistryDelegate() throws {
         let conf = makeKaleyraVideoPluginConfiguration(voipHandlingStrategy: .automatic)
 

@@ -4,6 +4,7 @@
 import XCTest
 import Hamcrest
 import KaleyraVideoSDK
+import Combine
 @testable import KaleyraVideoHybridNativeBridge
 
 @available(iOS 15.0, *)
@@ -34,7 +35,7 @@ class CallClientEventsReporterTests: UnitTestCase {
     // MARK: - Tests
 
     func testOnClientStartingShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         conference.state = .connecting
 
@@ -44,7 +45,7 @@ class CallClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientRunningShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         conference.state = .connected
 
@@ -54,7 +55,7 @@ class CallClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientStoppedShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         conference.state = .connected
         conference.state = .disconnected(error: nil)
@@ -65,7 +66,7 @@ class CallClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientReconnectingShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         conference.state = .connected
         conference.state = .reconnecting
@@ -76,7 +77,7 @@ class CallClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientFailedShouldSendTwoEvents() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         let error = anyNSError()
         conference.simulateFailure(error: error)
@@ -91,7 +92,7 @@ class CallClientEventsReporterTests: UnitTestCase {
     }
 
     func testStopShouldStopListeningForClientEvents() {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         sut.stop()
         conference.state = .connected
@@ -100,4 +101,11 @@ class CallClientEventsReporterTests: UnitTestCase {
     }
 
     // TODO: - Add tests for voip credentials
+}
+
+private extension CallClientEventsReporter {
+
+    func startWithImmediateScheduler() {
+        start(scheduler: ImmediateScheduler.shared)
+    }
 }
