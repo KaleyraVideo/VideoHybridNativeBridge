@@ -29,6 +29,7 @@ class KaleyraVideoSDKProtocolSpy: KaleyraVideoSDKProtocol {
     func configure(_ config: KaleyraVideoSDK.Config) throws {
         self.config = config
         configureInvocations.append(config)
+        try KaleyraVideo.instance.configure(config)
     }
     
     func connect(userId: String, provider: any KaleyraVideoSDK.AccessTokenProvider) throws {
@@ -41,6 +42,10 @@ class KaleyraVideoSDKProtocolSpy: KaleyraVideoSDKProtocol {
     
     func reset() {
         resetInvocations.append(())
+    }
+
+    deinit {
+        KaleyraVideo.instance.reset()
     }
 }
 

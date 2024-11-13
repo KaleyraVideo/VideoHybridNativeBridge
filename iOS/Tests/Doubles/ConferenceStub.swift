@@ -25,7 +25,7 @@ class ConferenceStub: Conference {
 
     var settings: KaleyraVideoSDK.ConferenceSettings {
         get {
-            fatalError()
+            KaleyraVideo.instance.conference!.settings
         } set {
 
         }
@@ -91,5 +91,3 @@ class ConferenceStub: Conference {
         state = .disconnected(error: error)
     }
 }
-
-

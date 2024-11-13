@@ -62,6 +62,7 @@ class VideoHybridNativeBridge {
 
         sdk.userDetailsProvider = UsersDetailsProvider(cache: usersCache)
         try sdk.configure(sdkConfig)
+        sdk.conference?.settings.tools = config.makeToolsConfig()
 
         reporter.start()
 
