@@ -22,10 +22,10 @@ class ChatClientEventsReporter: NSObject {
         super.init()
     }
 
-    func start() {
+    func start<S: Scheduler>(scheduler: S = DispatchQueue.main) {
         guard !isRunning else { return }
 
-        stateCancellable = conversation.statePublisher.dropFirst().receive(on: DispatchQueue.main).sink { [weak self] _ in
+        stateCancellable = conversation.statePublisher.dropFirst().receive(on: scheduler).sink { [weak self] _ in
             self?.notifyNewClientState()
         }
     }

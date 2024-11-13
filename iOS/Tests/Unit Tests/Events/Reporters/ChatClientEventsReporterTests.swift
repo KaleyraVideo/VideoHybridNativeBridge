@@ -3,6 +3,7 @@
 
 import XCTest
 import Hamcrest
+import Combine
 import KaleyraVideoSDK
 @testable import KaleyraVideoHybridNativeBridge
 
@@ -34,7 +35,7 @@ class ChatClientEventsReporterTests: UnitTestCase {
     // MARK: - Tests
 
     func testOnClientConnectingShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         client.state = .connecting
 
@@ -44,7 +45,7 @@ class ChatClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientConnectedShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         client.state = .connected
 
@@ -54,7 +55,7 @@ class ChatClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientDisconnectedShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         client.state = .connected
         client.state = .disconnected(error: nil)
@@ -65,7 +66,7 @@ class ChatClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientReconnectingShouldSendEvent() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         client.state = .connected
         client.state = .reconnecting
@@ -76,7 +77,7 @@ class ChatClientEventsReporterTests: UnitTestCase {
     }
 
     func testOnClientFailedShouldSendTwoEvents() throws {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         let error = anyNSError()
         client.simulateFailure(error: error)
@@ -91,12 +92,18 @@ class ChatClientEventsReporterTests: UnitTestCase {
     }
 
     func testStopShouldStopListeningForClientEvents() {
-        sut.start()
+        sut.startWithImmediateScheduler()
 
         sut.stop()
         client.state = .connected
 
         assertThat(emitter.sentEvents, empty())
     }
+}
 
+private extension ChatClientEventsReporter {
+
+    func startWithImmediateScheduler() {
+        start(scheduler: ImmediateScheduler.shared)
+    }
 }
