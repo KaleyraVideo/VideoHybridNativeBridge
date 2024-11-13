@@ -54,9 +54,9 @@ class KaleyraVideoSDKProtocolDummy: KaleyraVideoSDKProtocol {
 
     var userDetailsProvider: (any KaleyraVideoSDK.UserDetailsProvider)?
 
-    var conversation: (any KaleyraVideoSDK.Conversation)?
+    var conversation: (any KaleyraVideoSDK.Conversation)? = ConversationStub()
 
-    var conference: (any KaleyraVideoSDK.Conference)?
+    var conference: (any KaleyraVideoSDK.Conference)? = ConferenceStub()
 
     func configure(_ config: KaleyraVideoSDK.Config) throws {}
 

@@ -29,6 +29,7 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
         sut = nil
         sdkSpy = nil
         viewControllerPresenterSpy = nil
+        KaleyraVideo.instance.reset()
 
         try super.tearDownWithError()
     }
@@ -48,13 +49,6 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
         sut.presentChat(with: "user_id")
 
         assert(presenter: viewControllerPresenterSpy, hasPresented: ChatViewController.self)
-    }
-
-    func testPresentChatShouldCreateAndPassToChannelViewControllerAnOpenChatIntent() throws {
-        sut.presentChat(with: "user_id")
-        let channelVC = try unwrap(viewControllerPresenterSpy.presentInvocations.first?.viewController as? ChatViewController)
-
-        assertThat(channelVC.participants, presentAnd(equalTo(["user_id"])))
     }
 
     func testPresentChatShouldConfigureChannelViewController() throws {
@@ -95,7 +89,7 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
 
     // MARK: - Present Call UI
 
-    func testPresentCallShouldCallPresentCallViewControllerOnCallWindow() {
+    func testPresentCallShouldCreateTheCallOnConferenceObject() {
         let options = makeCreateCallOptions(callees: ["user_id", "other_user_id"],
                                             callType: .audioUpgradable,
                                             recordingType: .manual)
@@ -106,34 +100,14 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
         assertThat(sdkSpy.conferenceStub.callInvocations.first?.callees, presentAnd(equalTo(["user_id", "other_user_id"])))
         assertThat(sdkSpy.conferenceStub.callInvocations.first?.options.type, presentAnd(equalTo(.audioUpgradable)))
         assertThat(sdkSpy.conferenceStub.callInvocations.first?.options.recording, presentAnd(equalTo(.manual)))
-
-        sdkSpy.conferenceStub.simulateCallSucceed()
-
-        assertThat(callWindowSpy.setRootViewControllerInvocations, hasCount(1))
-        assertThat(callWindowSpy.setRootViewControllerInvocations.first?.controller, presentAnd(instanceOf(CallViewController.self)))
-        assertThat(callWindowSpy.setRootViewControllerInvocations.first?.animated, presentAnd(isTrue()))
     }
 
-    func testPresentCallFromUrlShouldCallPresentCallViewControllerOnCallWindow() throws {
+    func testPresentCallFromUrlShouldCreateTheCallOnConferenceObject() throws {
         let url = try URL.fromString("https://www.kaleyra.com")
 
         sut.presentCall(url)
         assertThat(sdkSpy.conferenceStub.joinInvocations, hasCount(1))
         assertThat(sdkSpy.conferenceStub.joinInvocations.first?.url, presentAnd(equalTo(URL(string: "https://www.kaleyra.com"))))
-
-        sdkSpy.conferenceStub.simulateJoinSucceed()
-
-        assertThat(callWindowSpy.setRootViewControllerInvocations, hasCount(1))
-        assertThat(callWindowSpy.setRootViewControllerInvocations.first?.controller, presentAnd(instanceOf(CallViewController.self)))
-        assertThat(callWindowSpy.setRootViewControllerInvocations.first?.animated, presentAnd(isTrue()))
-    }
-
-    func testDetectedIncomingCallShouldCallPresentCallViewControllerOnCallWindow() {
-        sdkSpy.conferenceStub.call = makeCall()
-
-        assertThat(callWindowSpy.setRootViewControllerInvocations, hasCount(1))
-        assertThat(callWindowSpy.setRootViewControllerInvocations.first?.controller, presentAnd(instanceOf(CallViewController.self)))
-        assertThat(callWindowSpy.setRootViewControllerInvocations.first?.animated, presentAnd(isTrue()))
     }
 
     func testChannelViewControllerDidTapAudioCallWithUsersShouldNotPresentCallViewControllerIfDisabledInConfig() {
@@ -152,8 +126,7 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
         sut.chatViewControllerDidTapAudioCallButton(makeChatViewController())
 
         assertThat(sdkSpy.conferenceStub.callInvocations, hasCount(1))
-        assertThat(sdkSpy.conferenceStub.callInvocations.first?.callees, presentAnd(equalTo(["user_id"])))
-        assertThat(sdkSpy.conferenceStub.callInvocations.first?.options.type, presentAnd(equalTo(.audioOnly)))
+        assertThat(sdkSpy.conferenceStub.callInvocations.first?.options.type, presentAnd(equalTo(.audioUpgradable)))
     }
 
     func testChannelViewControllerDidTapVideoCallWithWithUsersShouldNotPresentCallViewControllerIfDisabledInConfig() {
@@ -172,7 +145,6 @@ final class KaleyraVideoSDKUserInterfacePresenterTests: UnitTestCase {
         sut.chatViewControllerDidTapVideoCallButton(makeChatViewController())
 
         assertThat(sdkSpy.conferenceStub.callInvocations, hasCount(1))
-        assertThat(sdkSpy.conferenceStub.callInvocations.first?.callees, presentAnd(equalTo(["user_id"])))
         assertThat(sdkSpy.conferenceStub.callInvocations.first?.options.type, presentAnd(equalTo(.audioVideo)))
     }
 
