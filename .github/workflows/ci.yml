@@ -22,7 +22,7 @@ jobs:
         working-directory: ./iOS
         run: |
           set -o pipefail
-          sudo xcode-select -s '/Applications/Xcode_15.4.app/Contents/Developer'
+          sudo xcode-select -s '/Applications/Xcode_16.1.app/Contents/Developer'
           xcodebuild clean -workspace KaleyraVideoHybridNativeBridge.xcworkspace -scheme KaleyraVideoHybridNativeBridge | xcpretty
           xcodebuild test -workspace KaleyraVideoHybridNativeBridge.xcworkspace -scheme KaleyraVideoHybridNativeBridge -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=18.1"  | xcpretty -t
 
