@@ -28,7 +28,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
 
     // MARK: - Configure
 
-    func testConfigureShouldFrorwardInvocationToDecoratee() {
+    func testConfigureShouldForwardInvocationToDecoratee() {
         let config = makeUserInterfacePresenterConfiguration()
 
         sut.configure(with: config)
@@ -36,7 +36,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
         assertThat(spy.configureInvocations, equalTo([config]))
     }
 
-    func testConfigureShouldFrorwardInvocationToDecorateeOnCurrentQueue() {
+    func testConfigureShouldForwardInvocationToDecorateeOnCurrentQueue() {
         let exp = expectation(description: "Performing work async on background queue")
 
         spy.onConfigure = {
@@ -44,7 +44,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
             assertThat(Thread.isMainThread, isFalse())
         }
 
-        DispatchQueue.global(qos: .background).async {
+        executeOnBgThread {
             self.sut.configure(with: self.makeUserInterfacePresenterConfiguration())
         }
 
@@ -53,7 +53,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
 
     // MARK: - Present Call
 
-    func testPresentCallWithOptionsShouldFrorwardInvocationToDecoratee() {
+    func testPresentCallWithOptionsShouldForwardInvocationToDecoratee() {
         let options = makeCreateCallOptions()
 
         sut.presentCall(options)
@@ -61,7 +61,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
         assertThat(spy.presentCallWithOptionsInvocations, equalTo([options]))
     }
 
-    func testPresentCallWithOptionsShouldFrorwardInvocationToDecorateeOnMainQueue() {
+    func testPresentCallWithOptionsShouldForwardInvocationToDecorateeOnMainQueue() {
         let exp = expectation(description: "Performing work async on background queue")
 
         spy.onPresentCallWithOptions = {
@@ -70,14 +70,14 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
             assertThat(Thread.isMainThread, isTrue())
         }
 
-        DispatchQueue.global(qos: .background).async {
+        executeOnBgThread {
             self.sut.presentCall(self.makeCreateCallOptions())
         }
 
         wait(for: [exp], timeout: 5.0)
     }
 
-    func testPresentCallWithURLShouldFrorwardInvocationToDecoratee() {
+    func testPresentCallWithURLShouldForwardInvocationToDecoratee() {
         let url = makeAnyURL()
 
         sut.presentCall(url)
@@ -85,7 +85,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
         assertThat(spy.presentCallWithURLInvocations, equalTo([url]))
     }
 
-    func testPresentCallWithURLShouldFrorwardInvocationToDecorateeOnMainQueue() {
+    func testPresentCallWithURLShouldForwardInvocationToDecorateeOnMainQueue() {
         let exp = expectation(description: "Performing work async on background queue")
 
         spy.onPresentCallWithURL = {
@@ -94,7 +94,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
             assertThat(Thread.isMainThread, isTrue())
         }
 
-        DispatchQueue.global(qos: .background).async {
+        executeOnBgThread {
             self.sut.presentCall(self.makeAnyURL())
         }
 
@@ -103,13 +103,13 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
 
     // MARK: - Present Chat
 
-    func testPresentChatShouldFrorwardInvocationToDecoratee() {
+    func testPresentChatShouldForwardInvocationToDecoratee() {
         sut.presentChat(with: "user_id")
 
         assertThat(spy.presentChatInvocations, equalTo(["user_id"]))
     }
 
-    func testPresentChatShouldFrorwardInvocationToDecorateeOnMainQueue() {
+    func testPresentChatShouldForwardInvocationToDecorateeOnMainQueue() {
         let exp = expectation(description: "Performing work async on background queue")
 
         spy.onPresentChat = {
@@ -118,7 +118,7 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
             assertThat(Thread.isMainThread, isTrue())
         }
 
-        DispatchQueue.global(qos: .background).async {
+        executeOnBgThread {
             self.sut.presentChat(with: "user_id")
         }
 
@@ -141,5 +141,10 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
 
     private func makeAnyURL() -> URL {
         .init(string: "https://www.kaleyra.com")!
+    }
+
+    private func executeOnBgThread(_ work: @escaping () -> Void) {
+        DispatchQueue.global(qos: .background).async(execute: work)
+        DispatchQueue.global(qos: .background).resume()
     }
 }
