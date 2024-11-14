@@ -145,6 +145,5 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
 
     private func executeOnBgThread(_ work: @escaping () -> Void) {
         DispatchQueue.global(qos: .background).async(execute: work)
-        DispatchQueue.global(qos: .background).resume()
     }
 }
