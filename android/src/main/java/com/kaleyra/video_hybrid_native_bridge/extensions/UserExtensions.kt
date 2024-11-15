@@ -13,8 +13,8 @@ import com.kaleyra.video_hybrid_native_bridge.repository.UserDetailsEntity
  */
 internal fun UserDetailsEntity.toSDK(): UserDetails {
     return UserDetails(
-        userId = userAlias,
-        name = nickName ?: userAlias,
+        userId = userID,
+        name = name ?: userID,
         image = imageUrl?.let { Uri.parse(it) } ?: Uri.EMPTY
     )
 }
@@ -29,16 +29,14 @@ internal fun com.kaleyra.video_hybrid_native_bridge.UserDetails.toSDK(): UserDet
 
 internal fun com.kaleyra.video_hybrid_native_bridge.UserDetails.toDatabaseEntity(): UserDetailsEntity {
     return UserDetailsEntity(
-        userAlias = userID,
-        nickName = name,
+        userID = userID,
+        name = name,
         imageUrl = imageURL
     )
 }
 
 internal fun UserDetailsEntity.toUserDetails(): com.kaleyra.video_hybrid_native_bridge.UserDetails = com.kaleyra.video_hybrid_native_bridge.UserDetails(
-    userID = this.userAlias,
-    name = this.nickName,
+    userID = this.userID,
+    name = this.name,
     imageURL = this.imageUrl
 )
-
-internal fun UserDetails.toDatabaseEntity(): UserDetailsEntity = UserDetailsEntity(userId, null, null, name, null, image.toString())

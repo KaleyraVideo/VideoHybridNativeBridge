@@ -39,7 +39,7 @@ class SDKCachedUserDetailsTest {
 
     @Test
     fun loadUserDetailsFromDB() = runTest(CoroutineName("io")) {
-        val db = MockVideoHybridBridgeRepository(mutableListOf(UserDetailsEntity(userAlias = "user1", nickName = "ciao")))
+        val db = MockVideoHybridBridgeRepository(mutableListOf(UserDetailsEntity(userID = "user1", name = "ciao")))
         val cachedUserDetails = SDKCachedUserDetails(sdk, db, this)
         advanceUntilIdle()
         verify(exactly = 0) { sdk.userDetailsProvider = any() }
@@ -65,7 +65,7 @@ class SDKCachedUserDetailsTest {
         val cachedUserDetails = SDKCachedUserDetails(sdk, db, this)
         cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "user1", name = "ciao", imageURL = "test/path")))
         advanceUntilIdle()
-        verify { userDao.insert(listOf(UserDetailsEntity("user1", nickName = "ciao", imageUrl = "test/path"))) }
+        verify { userDao.insert(listOf(UserDetailsEntity("user1", name = "ciao", imageUrl = "test/path"))) }
         val userDetailsProvider = slot<UserDetailsProvider>()
         verify { sdk.userDetailsProvider = capture(userDetailsProvider) }
         assertEquals(
