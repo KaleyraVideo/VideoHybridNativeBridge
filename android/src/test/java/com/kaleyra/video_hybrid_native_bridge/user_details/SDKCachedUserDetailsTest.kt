@@ -44,7 +44,7 @@ class SDKCachedUserDetailsTest {
         advanceUntilIdle()
         verify(exactly = 0) { sdk.userDetailsProvider = any() }
         assertEquals(1, cachedUserDetails.cachedUserDetails.size)
-        assertEquals(UserDetails(userID = "user1", nickName = "ciao"), cachedUserDetails.cachedUserDetails.first())
+        assertEquals(UserDetails(userID = "user1", name = "ciao"), cachedUserDetails.cachedUserDetails.first())
     }
 
     @Test
@@ -52,7 +52,7 @@ class SDKCachedUserDetailsTest {
         val db = MockVideoHybridBridgeRepository()
         val userDao = db.userDao
         val cachedUserDetails = SDKCachedUserDetails(sdk, db, this)
-        cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "", nickName = "ciao")))
+        cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "", name = "ciao")))
         advanceUntilIdle()
         verify(exactly = 0) { userDao.insert(any()) }
         assertEquals(0, cachedUserDetails.cachedUserDetails.size)
@@ -63,7 +63,7 @@ class SDKCachedUserDetailsTest {
         val db = MockVideoHybridBridgeRepository()
         val userDao = db.userDao
         val cachedUserDetails = SDKCachedUserDetails(sdk, db, this)
-        cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "user1", nickName = "ciao", profileImageURL = "test/path")))
+        cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "user1", name = "ciao", imageURL = "test/path")))
         advanceUntilIdle()
         verify { userDao.insert(listOf(UserDetailsEntity("user1", nickName = "ciao", imageUrl = "test/path"))) }
         val userDetailsProvider = slot<UserDetailsProvider>()
@@ -73,7 +73,7 @@ class SDKCachedUserDetailsTest {
             userDetailsProvider.captured.invoke(listOf("user1")).getOrNull()
         )
         assertEquals(1, cachedUserDetails.cachedUserDetails.size)
-        assertEquals(UserDetails(userID = "user1", nickName = "ciao", profileImageURL = "test/path"), cachedUserDetails.cachedUserDetails.first())
+        assertEquals(UserDetails(userID = "user1", name = "ciao", imageURL = "test/path"), cachedUserDetails.cachedUserDetails.first())
     }
 
     @Test
@@ -81,7 +81,7 @@ class SDKCachedUserDetailsTest {
         val db = MockVideoHybridBridgeRepository()
         val cachedUserDetails = SDKCachedUserDetails(sdk, db, this)
         advanceUntilIdle()
-        cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "user1", nickName = "ciao")))
+        cachedUserDetails.addUsersDetails(arrayOf(UserDetails(userID = "user1", name = "ciao")))
         cachedUserDetails.removeUserDetails()
         advanceUntilIdle()
         verify(exactly = 1) { db.userDao.clear() }
