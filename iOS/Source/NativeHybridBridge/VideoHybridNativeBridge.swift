@@ -118,8 +118,6 @@ class VideoHybridNativeBridge {
         usersCache.purge()
     }
 
-    func verifyCurrentCall(_ verify: Bool) throws {}
-
     func reset() {
         sdk.reset()
     }
@@ -136,10 +134,6 @@ class VideoHybridNativeBridge {
 
     func clearUserCache() {
         debugPrint("clearUserCache() is not supported for iOS platform.")
-    }
-
-    func handlePushNotificationPayload(_ json: String) {
-        debugPrint("handlePushNotificationPayload(_) is not supported for iOS platform - json: \(json)")
     }
 
     func setDisplayModeForCurrentCall(_ mode: String) {
