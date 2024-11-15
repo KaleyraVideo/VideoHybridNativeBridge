@@ -283,16 +283,10 @@ struct Session {
 /// This is used to define the user details in the call/chat UI
 // MARK: - UserDetails
 struct UserDetails {
-    /// Email of the user
-    let email: String?
-    /// First name of the user
-    let firstName: String?
-    /// Last name of the user
-    let lastName: String?
-    /// Nickname for the user
-    let nickName: String?
     /// Image url to use as placeholder for the user.
-    let profileImageURL: String?
+    let imageURL: String?
+    /// The user's display name.
+    let name: String?
     /// User identifier
     let userID: String
 }

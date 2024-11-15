@@ -8,8 +8,8 @@ extension UserDetails {
 
     var bandyerDetails: KaleyraVideoSDK.UserDetails {
         .init(userId: userID, 
-              name: nickName,
-              image: URL(string: profileImageURL ?? ""),
-              handle: .init(type: .generic, value: nickName ?? userID))
+              name: name,
+              image: URL(string: imageURL ?? ""),
+              handle: .init(type: .generic, value: name ?? userID))
     }
 }

@@ -282,10 +282,6 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
                            whiteboard: false))
     }
 
-    private func makeUserDetailsFormat(userDetailsFormatDefault: String = "") -> UserDetailsFormat {
-        .init(androidNotification: nil, userDetailsFormatDefault: userDetailsFormatDefault)
-    }
-
     private func makeCreateCallOptions() -> CreateCallOptions {
         .init(callees: ["bob", "alice"], callType: .audioVideo, recordingType: RecordingType.none)
     }
@@ -295,7 +291,7 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
     }
 
     private func makeUserDetails() -> KaleyraVideoHybridNativeBridge.UserDetails {
-        .init(email: nil, firstName: nil, lastName: nil, nickName: nil, profileImageURL: nil, userID: "user_id")
+        .init(imageURL: nil, name: nil, userID: "user_id")
     }
 
     private func makeCallDummy() -> CallDummy {

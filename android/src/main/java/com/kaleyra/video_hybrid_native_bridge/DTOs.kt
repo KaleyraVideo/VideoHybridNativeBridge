@@ -205,6 +205,8 @@ data class Region (
 )
 
 /**
+ * Video Module Tools
+ *
  * Define the tools to use
  */
 data class Tools (
@@ -355,29 +357,14 @@ data class Session (
  */
 data class UserDetails (
     /**
-     * Email of the user
-     */
-    val email: String? = null,
-
-    /**
-     * First name of the user
-     */
-    val firstName: String? = null,
-
-    /**
-     * Last name of the user
-     */
-    val lastName: String? = null,
-
-    /**
-     * Nickname for the user
-     */
-    val nickName: String? = null,
-
-    /**
      * Image url to use as placeholder for the user.
      */
-    val profileImageURL: String? = null,
+    val imageURL: String? = null,
+
+    /**
+     * The user's display name.
+     */
+    val name: String? = null,
 
     /**
      * User identifier
