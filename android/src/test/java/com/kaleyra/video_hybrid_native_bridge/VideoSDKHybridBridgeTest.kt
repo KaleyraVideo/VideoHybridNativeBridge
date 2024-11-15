@@ -15,7 +15,6 @@ import com.kaleyra.video_hybrid_native_bridge.user_details.CachedUserDetails
 import com.kaleyra.video_hybrid_native_bridge.utils.RandomRunner
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -40,8 +39,7 @@ class VideoSDKHybridBridgeTest {
         connector = connector,
         presenter = uiPresenter,
         configurator = configurator,
-        userDetails = cachedUserDetails,
-        createCallOptionsProxy = createCallOptionsPropxy
+        userDetails = cachedUserDetails
     )
 
     @Test
@@ -49,7 +47,6 @@ class VideoSDKHybridBridgeTest {
         val createCallOptions = CreateCallOptions(listOf(""), Audio, Manual)
         plugin.startCall(createCallOptions)
         verify { uiPresenter.startCall(createCallOptions) }
-        assertEquals(createCallOptions, createCallOptionsPropxy.createCallOptions)
     }
 
     @Test

@@ -30,8 +30,6 @@ class VideoSDKHybridBridge(
     private val repository: VideoHybridBridgeRepository = VideoHybridBridgeRepository.getInstance(contextContainer.context.applicationContext),
     private val connector: CachedUserConnector = VideoSDKCachedUserConnector(sdk, repository, tokenProvider, eventsReporter, backgroundScope),
     private val userDetails: CachedUserDetails = SDKCachedUserDetails(sdk, repository, backgroundScope),
-    // TODO this is useless
-    private val createCallOptionsProxy: CreateCallOptionsProxy = CreateCallOptionsProxy(),
     private val configurator: CachedSDKConfigurator = VideoSDKConfigurator(sdk, repository, backgroundScope),
     private val presenter: UserInterfacePresenter = SDKUserInterfacePresenter(sdk, contextContainer, configurator),
 ) : VideoHybridBridge,
@@ -39,8 +37,6 @@ class VideoSDKHybridBridge(
     UserInterfacePresenter by presenter,
     CachedUserDetails by userDetails,
     CachedSDKConfigurator by configurator {
-
-    override fun handlePushNotificationPayload(payload: String) = Unit
 
     override fun reset() {
         configurator.reset()
@@ -53,9 +49,6 @@ class VideoSDKHybridBridge(
     }
 
     override fun startCall(callOptions: CreateCallOptions) {
-        createCallOptionsProxy.createCallOptions = callOptions
         presenter.startCall(callOptions)
     }
-
-    override fun verifyCurrentCall(verify: Boolean) = Unit
 }

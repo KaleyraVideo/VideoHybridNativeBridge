@@ -6,10 +6,9 @@ package com.kaleyra.video_hybrid_native_bridge.user_details
 import android.net.Uri
 import com.kaleyra.video_common_ui.KaleyraVideo
 import com.kaleyra.video_hybrid_native_bridge.UserDetails
-import com.kaleyra.video_hybrid_native_bridge.UserDetailsFormat
+import com.kaleyra.video_hybrid_native_bridge.extensions.toDatabaseEntity
 import com.kaleyra.video_hybrid_native_bridge.extensions.toSDK
 import com.kaleyra.video_hybrid_native_bridge.extensions.toUserDetails
-import com.kaleyra.video_hybrid_native_bridge.extensions.toDatabaseEntity
 import com.kaleyra.video_hybrid_native_bridge.repository.VideoHybridBridgeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -20,7 +19,6 @@ internal class SDKCachedUserDetails(
     private val repository: VideoHybridBridgeRepository,
     private val coroutineScope: CoroutineScope,
 ) : CachedUserDetails {
-    override fun setUserDetailsFormat(format: UserDetailsFormat) = Unit
 
     override val cachedUserDetails = androidx.collection.ArraySet<UserDetails>()
 
