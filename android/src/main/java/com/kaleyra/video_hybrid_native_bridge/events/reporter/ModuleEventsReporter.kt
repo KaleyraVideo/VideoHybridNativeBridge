@@ -48,6 +48,8 @@ class ModuleEventsReporter(
     }
 
     override fun stop() {
+        previousCallState = null
+        previousChatState = null
         jobs.forEach { it.cancel() }
         jobs.clear()
     }
