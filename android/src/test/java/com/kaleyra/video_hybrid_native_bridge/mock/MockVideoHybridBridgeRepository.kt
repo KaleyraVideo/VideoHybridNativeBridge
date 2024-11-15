@@ -74,7 +74,7 @@ class MockVideoHybridBridgeRepository(
         return connectedUserDao
     }
 
-    override fun createOpenHelper(config: DatabaseConfiguration?): SupportSQLiteOpenHelper = mockk()
+    override fun createOpenHelper(config: DatabaseConfiguration): SupportSQLiteOpenHelper = mockk()
 
     override fun createInvalidationTracker(): InvalidationTracker = mockk()
 
