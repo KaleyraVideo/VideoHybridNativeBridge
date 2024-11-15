@@ -50,7 +50,7 @@ class CallClientEventsReporterTests: UnitTestCase {
 
         let event = try unwrap(emitter.sentEvents.first)
         assertThat(event.event, equalTo(statusChangedEvent))
-        assertThat(event.args, presentAnd(instanceOfAnd(equalTo("ready"))))
+        assertThat(event.args, presentAnd(instanceOfAnd(equalTo("connected"))))
     }
 
     func testOnClientStoppedShouldSendEvent() throws {
@@ -61,7 +61,7 @@ class CallClientEventsReporterTests: UnitTestCase {
 
         let event = try unwrap(emitter.sentEvents.last)
         assertThat(event.event, equalTo(statusChangedEvent))
-        assertThat(event.args, presentAnd(instanceOfAnd(equalTo("stopped"))))
+        assertThat(event.args, presentAnd(instanceOfAnd(equalTo("disconnected"))))
     }
 
     func testOnClientReconnectingShouldSendEvent() throws {

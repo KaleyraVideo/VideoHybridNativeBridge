@@ -5,10 +5,9 @@ import Foundation
 import KaleyraVideoSDK
 
 enum ClientState: String {
-    case stopped = "stopped"
+    case disconnected = "disconnected"
     case connecting = "connecting"
-    case ready = "ready"
-    case paused = "paused"
+    case connected = "connected"
     case reconnecting = "reconnecting"
     case failed = "failed"
 }
@@ -21,12 +20,12 @@ extension ClientState {
                 if error != nil {
                     self = .failed
                 } else {
-                    self = .stopped
+                    self = .disconnected
                 }
             case .connecting:
                 self = .connecting
             case .connected:
-                self = .ready
+                self = .connected
             case .reconnecting:
                 self = .reconnecting
         }
