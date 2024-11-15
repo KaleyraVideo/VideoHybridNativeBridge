@@ -70,7 +70,7 @@ class ModuleEventsReporterTest {
         val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
         moduleEventsReporter.start()
         conferenceState.value = State.Disconnected
-        verify(exactly = 1) { eventsEmitter.sendEvent(Events.CallModuleStatusChanged, CrossPlatformModuleStatus.Stopped.name.lowercase()) }
+        verify(exactly = 1) { eventsEmitter.sendEvent(Events.CallModuleStatusChanged, CrossPlatformModuleStatus.Disconnected.name.lowercase()) }
     }
 
     @Test
@@ -82,11 +82,20 @@ class ModuleEventsReporterTest {
     }
 
     @Test
+    fun onCallModuleReconnectingShouldSendEvent() = runTest(UnconfinedTestDispatcher()) {
+        val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
+        moduleEventsReporter.start()
+        conferenceState.value = State.Connected
+        conferenceState.value = State.Connecting
+        verify(exactly = 1) { eventsEmitter.sendEvent(Events.CallModuleStatusChanged, CrossPlatformModuleStatus.Reconnecting.name.lowercase()) }
+    }
+
+    @Test
     fun onCallModuleConnectedShouldSendEvent() = runTest(UnconfinedTestDispatcher()) {
         val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
         moduleEventsReporter.start()
         conferenceState.value = State.Connected
-        verify(exactly = 1) { eventsEmitter.sendEvent(Events.CallModuleStatusChanged, CrossPlatformModuleStatus.Ready.name.lowercase()) }
+        verify(exactly = 1) { eventsEmitter.sendEvent(Events.CallModuleStatusChanged, CrossPlatformModuleStatus.Connected.name.lowercase()) }
     }
 
     @Test
@@ -111,7 +120,7 @@ class ModuleEventsReporterTest {
         val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
         moduleEventsReporter.start()
         conversationState.value = State.Disconnected
-        verify(exactly = 1) { eventsEmitter.sendEvent(Events.ChatModuleStatusChanged, CrossPlatformModuleStatus.Stopped.name.lowercase()) }
+        verify(exactly = 1) { eventsEmitter.sendEvent(Events.ChatModuleStatusChanged, CrossPlatformModuleStatus.Disconnected.name.lowercase()) }
     }
 
     @Test
@@ -119,7 +128,7 @@ class ModuleEventsReporterTest {
         val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
         moduleEventsReporter.start()
         conversationState.value = State.Connected
-        verify(exactly = 1) { eventsEmitter.sendEvent(Events.ChatModuleStatusChanged, CrossPlatformModuleStatus.Ready.name.lowercase()) }
+        verify(exactly = 1) { eventsEmitter.sendEvent(Events.ChatModuleStatusChanged, CrossPlatformModuleStatus.Connected.name.lowercase()) }
     }
 
     @Test
@@ -131,13 +140,21 @@ class ModuleEventsReporterTest {
     }
 
     @Test
+    fun onChatModuleReconnectingShouldSendEvent() = runTest(UnconfinedTestDispatcher()) {
+        val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
+        moduleEventsReporter.start()
+        conversationState.value = State.Connected
+        conversationState.value = State.Connecting
+        verify(exactly = 1) { eventsEmitter.sendEvent(Events.ChatModuleStatusChanged, CrossPlatformModuleStatus.Reconnecting.name.lowercase()) }
+    }
+
+    @Test
     fun onChatModuleFailedShouldSendEvent() = runTest(UnconfinedTestDispatcher()) {
         val moduleEventsReporter = ModuleEventsReporter(sdk = sdk, eventsEmitter = eventsEmitter, backgroundScope)
         moduleEventsReporter.start()
         conversationState.value = State.Disconnected.Error.ExpiredCredentials
         verify(exactly = 1) { eventsEmitter.sendEvent(Events.ChatModuleStatusChanged, CrossPlatformModuleStatus.Failed.name.lowercase()) }
     }
-
 
     @Test
     fun onChatModuleDisconnectingShouldNotSendEvent()  = runTest(UnconfinedTestDispatcher()) {
