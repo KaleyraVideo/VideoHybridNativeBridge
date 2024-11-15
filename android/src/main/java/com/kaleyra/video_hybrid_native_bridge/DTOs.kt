@@ -384,24 +384,3 @@ data class UserDetails (
      */
     val userID: String
 )
-
-/**
- * This is used to display the user details in the call/chat UI
- */
-data class UserDetailsFormat (
-    /**
-     * Format to be used when displaying an android notification
-     * <br/>
-     * <br/>
-     * <b><font color="blue">default</font>: equals to UserDetailsFormatter.default</b>
-     */
-    val androidNotification: String? = null,
-
-    /**
-     * Format to be used to display a user details on the call/chat UI
-     * <br/>
-     * <br/>
-     * <b><font color="blue">default</font>: ${userAlias}</b>
-     */
-    val default: String
-)

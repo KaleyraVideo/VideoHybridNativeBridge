@@ -51,7 +51,6 @@
 		F9875CD829A663B300A91C93 /* AccessTokenRequest+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C9D29A663B200A91C93 /* AccessTokenRequest+Encodable.swift */; };
 		F9875CD929A663B300A91C93 /* UserDetails+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C9E29A663B200A91C93 /* UserDetails+Decodable.swift */; };
 		F9875CDA29A663B300A91C93 /* RecordingType+KaleyraVideoSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875C9F29A663B200A91C93 /* RecordingType+KaleyraVideoSDK.swift */; };
-		F9875CDB29A663B300A91C93 /* UserDetailsFormat+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CA029A663B200A91C93 /* UserDetailsFormat+Decodable.swift */; };
 		F9875CDC29A663B300A91C93 /* Region+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CA129A663B200A91C93 /* Region+Decodable.swift */; };
 		F9875CDD29A663B300A91C93 /* Tools+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CA229A663B200A91C93 /* Tools+Decodable.swift */; };
 		F9875CDE29A663B300A91C93 /* Array+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CA329A663B200A91C93 /* Array+JSON.swift */; };
@@ -75,7 +74,6 @@
 		F9875D3629A6650A00A91C93 /* KaleyraVideoConfiguration+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CF829A6650A00A91C93 /* KaleyraVideoConfiguration+DecodableTests.swift */; };
 		F9875D3729A6650A00A91C93 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CF929A6650A00A91C93 /* EnvironmentTests.swift */; };
 		F9875D3829A6650A00A91C93 /* CreateCallOptions+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CFA29A6650A00A91C93 /* CreateCallOptions+DecodableTests.swift */; };
-		F9875D3929A6650A00A91C93 /* UserDetailsFormat+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CFB29A6650A00A91C93 /* UserDetailsFormat+DecodableTests.swift */; };
 		F9875D3A29A6650A00A91C93 /* AccessTokenRequest+EncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CFC29A6650A00A91C93 /* AccessTokenRequest+EncodableTests.swift */; };
 		F9875D3B29A6650A00A91C93 /* AccessTokenResponse+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CFD29A6650A00A91C93 /* AccessTokenResponse+DecodableTests.swift */; };
 		F9875D3C29A6650A00A91C93 /* RecordingTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875CFE29A6650A00A91C93 /* RecordingTypeTests.swift */; };
@@ -207,7 +205,6 @@
 		F9875C9D29A663B200A91C93 /* AccessTokenRequest+Encodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessTokenRequest+Encodable.swift"; sourceTree = "<group>"; };
 		F9875C9E29A663B200A91C93 /* UserDetails+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDetails+Decodable.swift"; sourceTree = "<group>"; };
 		F9875C9F29A663B200A91C93 /* RecordingType+KaleyraVideoSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RecordingType+KaleyraVideoSDK.swift"; sourceTree = "<group>"; };
-		F9875CA029A663B200A91C93 /* UserDetailsFormat+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDetailsFormat+Decodable.swift"; sourceTree = "<group>"; };
 		F9875CA129A663B200A91C93 /* Region+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Region+Decodable.swift"; sourceTree = "<group>"; };
 		F9875CA229A663B200A91C93 /* Tools+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tools+Decodable.swift"; sourceTree = "<group>"; };
 		F9875CA329A663B200A91C93 /* Array+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+JSON.swift"; sourceTree = "<group>"; };
@@ -231,7 +228,6 @@
 		F9875CF829A6650A00A91C93 /* KaleyraVideoConfiguration+DecodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KaleyraVideoConfiguration+DecodableTests.swift"; sourceTree = "<group>"; };
 		F9875CF929A6650A00A91C93 /* EnvironmentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		F9875CFA29A6650A00A91C93 /* CreateCallOptions+DecodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CreateCallOptions+DecodableTests.swift"; sourceTree = "<group>"; };
-		F9875CFB29A6650A00A91C93 /* UserDetailsFormat+DecodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDetailsFormat+DecodableTests.swift"; sourceTree = "<group>"; };
 		F9875CFC29A6650A00A91C93 /* AccessTokenRequest+EncodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessTokenRequest+EncodableTests.swift"; sourceTree = "<group>"; };
 		F9875CFD29A6650A00A91C93 /* AccessTokenResponse+DecodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessTokenResponse+DecodableTests.swift"; sourceTree = "<group>"; };
 		F9875CFE29A6650A00A91C93 /* RecordingTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTypeTests.swift; sourceTree = "<group>"; };
@@ -476,7 +472,6 @@
 				F9875CA229A663B200A91C93 /* Tools+Decodable.swift */,
 				F9875CA629A663B200A91C93 /* UserDetails+KaleyraVideoSDK.swift */,
 				F9875C9E29A663B200A91C93 /* UserDetails+Decodable.swift */,
-				F9875CA029A663B200A91C93 /* UserDetailsFormat+Decodable.swift */,
 				F9875C9329A663B200A91C93 /* VoipHandlingStrategy+Decodable.swift */,
 			);
 			path = DTOs;
@@ -595,7 +590,6 @@
 				F9875CFE29A6650A00A91C93 /* RecordingTypeTests.swift */,
 				F9875D0029A6650A00A91C93 /* RegionTests.swift */,
 				F9875CF729A6650A00A91C93 /* Tools+DecodableTests.swift */,
-				F9875CFB29A6650A00A91C93 /* UserDetailsFormat+DecodableTests.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -973,7 +967,6 @@
 				F9B7E59929E5602800AB9208 /* CallOptions+KaleyraVideoSDK.swift in Sources */,
 				F967342529D2EFE500F9B914 /* TokenProvider.swift in Sources */,
 				F9875CDE29A663B300A91C93 /* Array+JSON.swift in Sources */,
-				F9875CDB29A663B300A91C93 /* UserDetailsFormat+Decodable.swift in Sources */,
 				F9875CE529A663B300A91C93 /* Events.swift in Sources */,
 				F9875CDD29A663B300A91C93 /* Tools+Decodable.swift in Sources */,
 				F9875CDC29A663B300A91C93 /* Region+Decodable.swift in Sources */,
@@ -1045,7 +1038,6 @@
 				F9875D5429A6650A00A91C93 /* CompletionSpy.swift in Sources */,
 				F9875D4329A6650A00A91C93 /* ChatClientEventsReporterTests.swift in Sources */,
 				F9875D5629A6650A00A91C93 /* Weak.swift in Sources */,
-				F9875D3929A6650A00A91C93 /* UserDetailsFormat+DecodableTests.swift in Sources */,
 				F9875D4C29A6650A00A91C93 /* ConversationStub.swift in Sources */,
 				F96C93FB29E84501004FA995 /* UserInterfacePresenterSpy.swift in Sources */,
 				F9875D5129A6650A00A91C93 /* JSONDecodingTestsCase.swift in Sources */,

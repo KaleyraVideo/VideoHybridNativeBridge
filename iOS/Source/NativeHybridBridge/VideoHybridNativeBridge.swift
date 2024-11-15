@@ -86,8 +86,6 @@ class VideoHybridNativeBridge {
         return reporter.lastVoIPToken
     }
 
-    func setUserDetailsFormat(_ format: UserDetailsFormat) {}
-
     func startCall(_ options: CreateCallOptions) throws {
         try checkIsConfigured()
 
