@@ -7,7 +7,7 @@ import Hamcrest
 
 class Tools_DecodableTests: UnitTestCase, JSONDecodingTestCase {
 
-    typealias SUT = Tools
+    typealias SUT = ToolsConfiguration
 
     func testDecodesValidValue() throws {
         let json = """

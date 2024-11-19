@@ -3,7 +3,7 @@
 
 import Foundation
 
-extension Tools: Decodable {
+extension ToolsConfiguration: Decodable {
 
     private enum CodingKeys: String, CodingKey {
         case chat

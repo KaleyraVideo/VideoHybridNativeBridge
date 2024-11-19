@@ -11,7 +11,6 @@ extension KaleyraVideoConfiguration: Decodable {
         case region
         case logEnabled
         case iosConfig
-        case tools
     }
 
     init(from decoder: Decoder) throws {
@@ -21,7 +20,6 @@ extension KaleyraVideoConfiguration: Decodable {
         self.region = try container.decode(Region.self, forKey: .region)
         self.logEnabled = try container.decodeIfPresent(Bool.self, forKey: .logEnabled) ?? false
         self.iosConfig = try container.decodeIfPresent(IosConfiguration.self, forKey: .iosConfig)
-        self.tools = try container.decodeIfPresent(Tools.self, forKey: .tools)
     }
 }
 

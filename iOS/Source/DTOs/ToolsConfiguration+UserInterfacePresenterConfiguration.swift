@@ -3,23 +3,23 @@
 
 import Foundation
 
-extension KaleyraVideoConfiguration {
+extension ToolsConfiguration {
 
     func uiPresenterConfiguration() -> UserInterfacePresenterConfiguration {
-        .init(showsFeedbackWhenCallEnds: tools?.feedback ?? false,
+        .init(showsFeedbackWhenCallEnds: feedback ?? false,
               chatAudioButtonConf: chatAudioButtonConf,
               chatVideoButtonConf: chatVideoButtonConf)
     }
 
     private var chatAudioButtonConf: UserInterfacePresenterConfiguration.ChatAudioButtonConfiguration {
-        guard let audioOptions = tools?.chat?.audioCallOption else {
+        guard let audioOptions = chat?.audioCallOption else {
             return .disabled
         }
         return .enabled(audioOptions)
     }
 
     private var chatVideoButtonConf: UserInterfacePresenterConfiguration.ChatVideoButtonConfiguration {
-        guard let videoOptions = tools?.chat?.videoCallOption else {
+        guard let videoOptions = chat?.videoCallOption else {
             return .disabled
         }
         return .enabled(videoOptions)
