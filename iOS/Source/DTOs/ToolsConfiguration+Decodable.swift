@@ -22,3 +22,5 @@ extension ToolsConfiguration: Decodable {
         self.feedback = try container.decodeIfPresent(Bool.self, forKey: .feedback) ?? false
     }
 }
+
+extension ToolsConfiguration: JSONDecodable {}
