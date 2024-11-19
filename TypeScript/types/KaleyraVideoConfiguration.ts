@@ -2,7 +2,6 @@
 // See LICENSE for licensing information
 
 import { IosConfiguration } from "./IosConfiguration";
-import { Tools } from "./Tools";
 import { Environment } from "./Environment";
 import { Region } from "./Region";
 
@@ -29,11 +28,6 @@ export interface KaleyraVideoConfiguration {
    * Set to true to enable log, default value is false
    */
   logEnabled?: boolean;
-
-  /**
-   * Define the tools to use
-   */
-  tools?: Tools;
 
   /**
    * Define to customize the iOS configuration
