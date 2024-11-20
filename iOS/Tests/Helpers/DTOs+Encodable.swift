@@ -12,6 +12,7 @@ extension KaleyraVideoConfiguration: Encodable {
         case region
         case logEnabled
         case iosConfig
+        case tools
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -21,6 +22,7 @@ extension KaleyraVideoConfiguration: Encodable {
         try container.encode(region, forKey: .region)
         try container.encode(logEnabled, forKey: .logEnabled)
         try container.encode(iosConfig, forKey: .iosConfig)
+        try container.encode(tools, forKey: .tools)
     }
 
     func JSONEncoded() throws -> String {
@@ -98,7 +100,7 @@ extension VoipHandlingStrategy: Encodable {
     }
 }
 
-extension ToolsConfiguration: Encodable {
+extension Tools: Encodable {
 
     private enum CodingKeys: String, CodingKey {
         case chat

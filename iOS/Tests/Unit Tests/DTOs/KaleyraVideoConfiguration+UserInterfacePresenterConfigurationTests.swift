@@ -40,13 +40,21 @@ final class KaleyraVideoConfiguration_UserInterfacePresenterConfigurationTests: 
 
     private func makeSUT(feedback: Bool? = nil,
                          audioCallOption: AudioCallOptions? = nil,
-                         videoCallOption: KaleyraVideoHybridNativeBridge.CallOptions? = nil) -> ToolsConfiguration {
-        .init(chat: .init(audioCallOption: audioCallOption, videoCallOption: videoCallOption),
-              feedback: feedback,
-              fileShare: false,
-              screenShare: .init(inApp: false,
-                                 wholeDevice: false),
-              whiteboard: false)
+                         videoCallOption: KaleyraVideoHybridNativeBridge.CallOptions? = nil) -> KaleyraVideoConfiguration {
+        .init(appID: "app_id",
+              environment: .init(name: "sandbox"),
+              iosConfig: .init(callkit: .init(appIconName: "app_icon",
+                                              enabled: true,
+                                              ringtoneSoundName: "ringtone"),
+                               voipHandlingStrategy: .disabled),
+              logEnabled: false,
+              region: .init(name: "europe"),
+              tools: .init(chat: .init(audioCallOption: audioCallOption, videoCallOption: videoCallOption),
+                           feedback: feedback,
+                           fileShare: false,
+                           screenShare: .init(inApp: false,
+                                              wholeDevice: false),
+                           whiteboard: false))
     }
 
     private func makeAudioCallOptions() -> AudioCallOptions {

@@ -30,10 +30,6 @@ struct UserInterfacePresenterConfiguration: Equatable {
     var chatHasVideoButton: Bool {
         chatVideoButtonConf != .disabled
     }
-
-    static var `default`: UserInterfacePresenterConfiguration {
-        .init(showsFeedbackWhenCallEnds: false, chatAudioButtonConf: .disabled, chatVideoButtonConf: .disabled)
-    }
 }
 
 class KaleyraVideoSDKUserInterfacePresenter: NSObject, UserInterfacePresenter {
@@ -44,7 +40,9 @@ class KaleyraVideoSDKUserInterfacePresenter: NSObject, UserInterfacePresenter {
     private let viewControllerPresenter: ViewControllerPresenter
     private let callWindow: CallWindowProtocol
 
-    var configuration: UserInterfacePresenterConfiguration = .default
+    private var configuration = UserInterfacePresenterConfiguration(showsFeedbackWhenCallEnds: false,
+                                                                    chatAudioButtonConf: .disabled,
+                                                                    chatVideoButtonConf: .disabled)
 
     private lazy var subscriptions = Set<AnyCancellable>()
 
@@ -84,11 +82,6 @@ class KaleyraVideoSDKUserInterfacePresenter: NSObject, UserInterfacePresenter {
 
     // MARK: - Setup
 
-    func setup() {
-        setupSDK()
-        setupNotificationCoordinator()
-    }
-
     private func setupSDK() {
         sdk.conference?.callPublisher.compactMap({ $0 }).receive(on: RunLoop.main).sink { [weak self] call in
             self?.present(call: call)
@@ -105,7 +98,8 @@ class KaleyraVideoSDKUserInterfacePresenter: NSObject, UserInterfacePresenter {
     func configure(with configuration: UserInterfacePresenterConfiguration) {
         self.configuration = configuration
 
-        setup()
+        setupSDK()
+        setupNotificationCoordinator()
     }
 
     // MARK: - Presenting Call UI

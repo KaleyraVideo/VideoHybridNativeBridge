@@ -54,6 +54,7 @@ class KaleyraVideoConfiguration_DecodableTests: UnitTestCase, JSONDecodingTestCa
         assertThat(decoded.region.name, equalTo("europe"))
         assertThat(decoded.logEnabled, presentAnd(isTrue()))
         assertThat(decoded.iosConfig, present())
+        assertThat(decoded.tools, present())
     }
 
     func testDecodesValidObjectSettingMissingValuesToDefaults() throws {
@@ -76,6 +77,7 @@ class KaleyraVideoConfiguration_DecodableTests: UnitTestCase, JSONDecodingTestCa
         assertThat(decoded.region.name, equalTo("europe"))
         assertThat(decoded.logEnabled, presentAnd(isFalse()))
         assertThat(decoded.iosConfig, nilValue())
+        assertThat(decoded.tools, nilValue())
     }
 
     func testThrowsDecodingErrorWhenMandatoryValueIsMissing() throws {

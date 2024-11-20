@@ -5,17 +5,8 @@ import Foundation
 
 extension MainQueueRelay: UserInterfacePresenter where Decoratee: UserInterfacePresenter {
 
-    var configuration: UserInterfacePresenterConfiguration {
-        get {
-            decoratee.configuration
-        }
-        set {
-            decoratee.configuration = newValue
-        }
-    }
-    
-    func setup() {
-        decoratee.setup()
+    func configure(with configuration: UserInterfacePresenterConfiguration) {
+        decoratee.configure(with: configuration)
     }
 
     func presentCall(_ options: CreateCallOptions) {

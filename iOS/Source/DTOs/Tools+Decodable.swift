@@ -3,7 +3,7 @@
 
 import Foundation
 
-extension ToolsConfiguration: Decodable {
+extension Tools: Decodable {
 
     private enum CodingKeys: String, CodingKey {
         case chat
@@ -22,5 +22,3 @@ extension ToolsConfiguration: Decodable {
         self.feedback = try container.decodeIfPresent(Bool.self, forKey: .feedback) ?? false
     }
 }
-
-extension ToolsConfiguration: JSONDecodable {}

@@ -96,7 +96,12 @@ data class KaleyraVideoConfiguration (
     /**
      * This variable defines the region where you will be europe, india or us.
      */
-    val region: Region
+    val region: Region,
+
+    /**
+     * Define the tools to use
+     */
+    val tools: Tools? = null
 )
 
 /**
@@ -200,19 +205,11 @@ data class Region (
 )
 
 /**
- * Session
- */
-data class Session (
-    /**
-     * The user id you want to connect
-     */
-    val userID: String
-)
-
-/**
  * Video Module Tools
+ *
+ * Define the tools to use
  */
-data class ToolsConfiguration (
+data class Tools (
     /**
      * Set to enable the chat feature
      * <br/>
@@ -343,6 +340,16 @@ data class ScreenShareToolConfiguration (
      * <b><font color="blue">default</font>: false</b>
      */
     val wholeDevice: Boolean? = null
+)
+
+/**
+ * Session
+ */
+data class Session (
+    /**
+     * The user id you want to connect
+     */
+    val userID: String
 )
 
 /**

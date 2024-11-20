@@ -28,28 +28,24 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
 
     // MARK: - Configure
 
-    func testConfigurationShouldGetAndSetConfigurationOnDecoratee() {
-        let config = makeUserInterfacePresenterConfiguration(showsFeedbackWhenCallEnds: false)
+    func testConfigureShouldForwardInvocationToDecoratee() {
+        let config = makeUserInterfacePresenterConfiguration()
 
-        sut.configuration = config
-        assertThat(spy.configuration, equalTo(config))
+        sut.configure(with: config)
 
-        spy.configuration = .default
-        assertThat(sut.configuration, equalTo(.default))
+        assertThat(spy.configureInvocations, equalTo([config]))
     }
 
-    // MARK: - Setup
-
-    func testSetupShouldForwardInvocationToDecorateeOnCurrentQueue() {
+    func testConfigureShouldForwardInvocationToDecorateeOnCurrentQueue() {
         let exp = expectation(description: "Performing work async on background queue")
 
-        spy.onSetup = {
+        spy.onConfigure = {
             exp.fulfill()
             assertThat(Thread.isMainThread, isFalse())
         }
 
         executeOnBgThread {
-            self.sut.setup()
+            self.sut.configure(with: self.makeUserInterfacePresenterConfiguration())
         }
 
         wait(for: [exp], timeout: 10.0)
@@ -135,12 +131,8 @@ final class UserInterfacePresenter_MainQueueRelayTests: UnitTestCase {
         .init()
     }
 
-    private func makeUserInterfacePresenterConfiguration(showsFeedbackWhenCallEnds: Bool = false,
-                                                         chatAudioButtonConf: UserInterfacePresenterConfiguration.ChatAudioButtonConfiguration = .disabled,
-                                                         chatVideoButtonConf: UserInterfacePresenterConfiguration.ChatVideoButtonConfiguration = .disabled) -> UserInterfacePresenterConfiguration {
-        .init(showsFeedbackWhenCallEnds: showsFeedbackWhenCallEnds,
-              chatAudioButtonConf: chatAudioButtonConf,
-              chatVideoButtonConf: chatVideoButtonConf)
+    private func makeUserInterfacePresenterConfiguration() -> UserInterfacePresenterConfiguration {
+        .init(showsFeedbackWhenCallEnds: false, chatAudioButtonConf: .disabled, chatVideoButtonConf: .disabled)
     }
 
     private func makeCreateCallOptions() -> CreateCallOptions {

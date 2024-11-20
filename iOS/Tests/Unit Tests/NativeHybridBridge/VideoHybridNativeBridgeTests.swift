@@ -51,6 +51,16 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
         assert(config: sdkConf, equalTo: expectedSdkConfig)
     }
 
+    func testConfigureSDKShouldConfigureConference() throws {
+        let sut = VideoHybridNativeBridge(emitter: EventEmitterDummy(), rootViewController: nil) { AccessTokenProviderStub() }
+        let config = makeKaleyraVideoConfiguration()
+        let expectedTools = config.makeToolsConfig()
+
+        try sut.configureSDK(config)
+
+        assertThat(KaleyraVideo.instance.conference?.settings.tools, presentAnd(equalTo(expectedTools)))
+    }
+
     func testConfigureSDKShouldSetUserDetailsProvider() throws {
         let config = makeKaleyraVideoConfiguration()
 
@@ -75,37 +85,19 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
         assertThat(sut.reporterSpy.startInvocations, hasCount(1))
     }
 
-    func testConfigureSDKShouldSetupUIPresenter() throws {
-        let config = makeKaleyraVideoConfiguration()
+    func testConfigureSDKShouldConfigureUIPresenter() throws {
+        let audioOptions = makeAudioCallOptions()
+        let videoOptions = makeCallOptions()
+        let config = makeKaleyraVideoConfiguration(feedback: true,
+                                                    audioCallOption: audioOptions,
+                                                    videoCallOption: videoOptions)
 
         try sut.configureSDK(config)
 
-        assertThat(sut.uiPresenterSpy.setupInvocations, hasCount(1))
-    }
-
-    // MARK: - Configure Tools
-
-    func testConfigureToolsShouldConfigureConferenceToolsSettings() throws {
-        let sut = VideoHybridNativeBridge(emitter: EventEmitterDummy(), rootViewController: nil) { AccessTokenProviderStub() }
-        let toolsConfiguration = makeToolsConfiguration()
-
-        try sut.configureSDK(makeKaleyraVideoConfiguration())
-        try sut.configureTools(toolsConfiguration)
-
-        assertThat(KaleyraVideo.instance.conference?.settings.tools, presentAnd(equalTo(toolsConfiguration.makeToolsConfig())))
-    }
-
-    func testConfigureToolsShouldConfigureUIPresenter() throws {
-        let audioOptions = makeAudioCallOptions()
-        let videoOptions = makeCallOptions()
-        let config = makeToolsConfiguration(feedback: true,
-                                            audioCallOption: audioOptions,
-                                            videoCallOption: videoOptions)
-
-        try configureSUT()
-        try sut.configureTools(config)
-
-        assertThat(sut.uiPresenterSpy.configuration, equalTo(config.uiPresenterConfiguration()))
+        assertThat(sut.uiPresenterSpy.configureInvocations, hasCount(1))
+        assertThat(sut.uiPresenterSpy.configureInvocations.first?.showsFeedbackWhenCallEnds, presentAnd(isTrue()))
+        assertThat(sut.uiPresenterSpy.configureInvocations.first?.chatAudioButtonConf, presentAnd(equalTo(.enabled(audioOptions))))
+        assertThat(sut.uiPresenterSpy.configureInvocations.first?.chatVideoButtonConf, presentAnd(equalTo(.enabled(videoOptions))))
     }
 
     // MARK: - Call Client
@@ -270,7 +262,10 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
     }
 
     private func makeKaleyraVideoConfiguration(voipStrategy: VoipHandlingStrategy = .disabled,
-                                               logEnabled: Bool = false) -> KaleyraVideoConfiguration {
+                                               logEnabled: Bool = false,
+                                               feedback: Bool = false,
+                                               audioCallOption: AudioCallOptions? = nil,
+                                               videoCallOption: KaleyraVideoHybridNativeBridge.CallOptions? = nil) -> KaleyraVideoConfiguration {
         .init(appID: "app_id",
               environment: .init(name: "sandbox"),
               iosConfig: .init(callkit: .init(appIconName: "app_icon",
@@ -278,18 +273,13 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
                                               ringtoneSoundName: "ringtone"),
                                voipHandlingStrategy: voipStrategy),
               logEnabled: logEnabled,
-              region: .init(name: "europe"))
-    }
-
-    private func makeToolsConfiguration(feedback: Bool = false,
-                                        audioCallOption: AudioCallOptions? = nil,
-                                        videoCallOption: KaleyraVideoHybridNativeBridge.CallOptions? = nil) -> ToolsConfiguration {
-        .init(chat: .init(audioCallOption: audioCallOption, videoCallOption: videoCallOption),
-                     feedback: feedback,
-                     fileShare: false,
-                     screenShare: .init(inApp: false,
-                                        wholeDevice: false),
-                     whiteboard: false)
+              region: .init(name: "europe"),
+              tools: .init(chat: .init(audioCallOption: audioCallOption, videoCallOption: videoCallOption),
+                           feedback: feedback,
+                           fileShare: false,
+                           screenShare: .init(inApp: false,
+                                              wholeDevice: false),
+                           whiteboard: false))
     }
 
     private func makeCreateCallOptions() -> CreateCallOptions {

@@ -7,7 +7,7 @@ import {ChatToolConfiguration} from "./ChatToolConfiguration";
 /**
  * Video Module Tools
  */
-export interface ToolsConfiguration {
+export interface Tools {
     /**
      * Set to true to enable the file sharing feature
      * <br/>

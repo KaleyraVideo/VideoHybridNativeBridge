@@ -15,11 +15,11 @@
 //   let environment = try Environment(json)
 //   let voipHandlingStrategy = try? JSONDecoder().decode(VoipHandlingStrategy.self, from: jsonData)
 //   let iosConfiguration = try IosConfiguration(json)
+//   let screenShareToolConfiguration = try ScreenShareToolConfiguration(json)
+//   let tools = try Tools(json)
 //   let region = try Region(json)
 //   let kaleyraVideoConfiguration = try KaleyraVideoConfiguration(json)
-//   let screenShareToolConfiguration = try ScreenShareToolConfiguration(json)
 //   let session = try Session(json)
-//   let toolsConfiguration = try ToolsConfiguration(json)
 //   let userDetails = try UserDetails(json)
 
 import Foundation
@@ -92,6 +92,8 @@ struct KaleyraVideoConfiguration {
     let logEnabled: Bool?
     /// This variable defines the region where you will be europe, india or us.
     let region: Region
+    /// Define the tools to use
+    let tools: Tools?
 }
 
 /// An environment where your integration will run
@@ -171,16 +173,11 @@ struct Region {
     let name: String
 }
 
-/// Session
-// MARK: - Session
-struct Session {
-    /// The user id you want to connect
-    let userID: String
-}
-
 /// Video Module Tools
-// MARK: - ToolsConfiguration
-struct ToolsConfiguration {
+///
+/// Define the tools to use
+// MARK: - Tools
+struct Tools {
     /// Set to enable the chat feature
     /// <br/>
     /// <br/>
@@ -274,6 +271,13 @@ struct ScreenShareToolConfiguration {
     /// <br/>
     /// <b><font color="blue">default</font>: false</b>
     let wholeDevice: Bool?
+}
+
+/// Session
+// MARK: - Session
+struct Session {
+    /// The user id you want to connect
+    let userID: String
 }
 
 /// This is used to define the user details in the call/chat UI

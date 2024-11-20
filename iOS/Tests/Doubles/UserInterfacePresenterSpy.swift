@@ -6,21 +6,19 @@ import Foundation
 
 class UserInterfacePresenterSpy: UserInterfacePresenter {
 
-    var configuration: UserInterfacePresenterConfiguration = .default
-
-    private(set) var setupInvocations: [Void] = []
+    private(set) var configureInvocations = [UserInterfacePresenterConfiguration]()
     private(set) var presentCallWithOptionsInvocations = [CreateCallOptions]()
     private(set) var presentCallWithURLInvocations = [URL]()
     private(set) var presentChatInvocations = [String]()
 
-    var onSetup: (() -> Void)?
+    var onConfigure: (() -> Void)?
     var onPresentCallWithOptions: (() -> Void)?
     var onPresentCallWithURL: (() -> Void)?
     var onPresentChat: (() -> Void)?
 
-    func setup() {
-        setupInvocations.append(())
-        onSetup?()
+    func configure(with configuration: UserInterfacePresenterConfiguration) {
+        configureInvocations.append(configuration)
+        onConfigure?()
     }
 
     func presentCall(_ options: CreateCallOptions) {
