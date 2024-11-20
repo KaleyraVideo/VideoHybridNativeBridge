@@ -63,13 +63,14 @@ class VideoHybridNativeBridge {
         try sdk.configure(sdkConfig)
 
         reporter.start()
+        uiPresenter.setup()
     }
 
     func configureTools(_ config: ToolsConfiguration) throws {
         try checkIsConfigured()
 
         sdk.conference?.settings.tools = config.makeToolsConfig()
-        uiPresenter.configure(with: config.uiPresenterConfiguration())
+        uiPresenter.configuration = config.uiPresenterConfiguration()
     }
 
     func callClientStateDescription() throws -> String {

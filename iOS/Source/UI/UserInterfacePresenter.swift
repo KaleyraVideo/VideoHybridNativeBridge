@@ -3,9 +3,11 @@
 
 import Foundation
 
-protocol UserInterfacePresenter {
+protocol UserInterfacePresenter: AnyObject {
 
-    func configure(with configuration: UserInterfacePresenterConfiguration)
+    var configuration: UserInterfacePresenterConfiguration { get set }
+
+    func setup()
 
     func presentCall(_ options: CreateCallOptions)
     func presentCall(_ url: URL)

@@ -75,6 +75,14 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
         assertThat(sut.reporterSpy.startInvocations, hasCount(1))
     }
 
+    func testConfigureSDKShouldSetupUIPresenter() throws {
+        let config = makeKaleyraVideoConfiguration()
+
+        try sut.configureSDK(config)
+
+        assertThat(sut.uiPresenterSpy.setupInvocations, hasCount(1))
+    }
+
     // MARK: - Configure Tools
 
     func testConfigureToolsShouldConfigureConferenceToolsSettings() throws {
@@ -97,10 +105,7 @@ final class VideoHybridNativeBridgeTests: UnitTestCase {
         try configureSUT()
         try sut.configureTools(config)
 
-        assertThat(sut.uiPresenterSpy.configureInvocations, hasCount(1))
-        assertThat(sut.uiPresenterSpy.configureInvocations.first?.showsFeedbackWhenCallEnds, presentAnd(isTrue()))
-        assertThat(sut.uiPresenterSpy.configureInvocations.first?.chatAudioButtonConf, presentAnd(equalTo(.enabled(audioOptions))))
-        assertThat(sut.uiPresenterSpy.configureInvocations.first?.chatVideoButtonConf, presentAnd(equalTo(.enabled(videoOptions))))
+        assertThat(sut.uiPresenterSpy.configuration, equalTo(config.uiPresenterConfiguration()))
     }
 
     // MARK: - Call Client
