@@ -27,8 +27,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - uses: peterjgrainger/action-create-branch@v2.2.0
         env:
             GITHUB_TOKEN: ${{steps.generate_token.outputs.token}}
@@ -44,8 +44,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
           ref: update_native
@@ -66,8 +66,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
           ref: update_native
@@ -91,8 +91,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
           token: ${{steps.generate_token.outputs.token}}
