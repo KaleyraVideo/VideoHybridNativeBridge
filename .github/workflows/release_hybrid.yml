@@ -39,6 +39,7 @@ jobs:
 
   clean:
     needs: [ release_cordova, release_react_native, release_flutter ]
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v1
