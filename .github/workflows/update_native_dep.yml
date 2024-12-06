@@ -51,7 +51,7 @@ jobs:
           ref: update_native
           token: ${{steps.generate_token.outputs.token}}
       - name: "Update the android version"
-        run: sed -i 's/implementation "com.bandyer:bandyer-android-sdk:[0-9]*\.[0-9]*\.[0-9]*-*\w*"/implementation "com.bandyer:bandyer-android-sdk:'${{ github.event.inputs.release_version }}'"/g' ./android/build.gradle
+        run: sed -i 's/kaleyraVideoSdkVersion = "[0-9]*\.[0-9]*\.[0-9]*-*\w*"/kaleyraVideoSdkVersion = "'${{ github.event.inputs.release_version }}'"/g' ./android/bridge.gradle
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: Update android sdk version"
@@ -74,7 +74,7 @@ jobs:
           token: ${{steps.generate_token.outputs.token}}
       - name: "Update the ios version"
         run: |
-            sed -i '' "s/pod 'Bandyer', '~> [0-9]*\.[0-9]*\.[0-9]*-*\w*'/ pod 'Bandyer', '~> "${{ github.event.inputs.release_version }}"'/g" ./iOS/Podfile
+            sed -i '' "s/pod 'KaleyraVideoSDK', '~> [0-9]*\.[0-9]*\.[0-9]*-*\w*'/ pod 'KaleyraVideoSDK', '~> "${{ github.event.inputs.release_version }}"'/g" ./iOS/Podfile
             cd iOS
             pod install --repo-update
       - uses: stefanzweifel/git-auto-commit-action@v5
