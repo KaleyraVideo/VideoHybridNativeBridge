@@ -6,7 +6,7 @@ on:
       release_version:
         description: Define the specific release version?
         type: string
-        required: false
+        required: true
       release_type:
         description: Specify the release type
         type: string
