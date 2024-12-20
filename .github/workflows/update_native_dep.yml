@@ -1,6 +1,21 @@
 name: Update native version used
 
 on:
+  workflow_call:
+    inputs:
+      release_version:
+        description: Define the specific release version?
+        type: string
+        required: false
+      release_type:
+        description: Specify the release type
+        type: string
+        required: true
+      platform:
+        description: Specify the platform to be updated
+        type: string
+        required: true
+
   workflow_dispatch:
     inputs:
       release_version:
