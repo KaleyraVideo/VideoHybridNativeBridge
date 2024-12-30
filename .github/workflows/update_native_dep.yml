@@ -140,8 +140,9 @@ jobs:
           git reset --hard update_native
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
+          path: videoHybridNativeBridge
           token: ${{steps.generate_token.outputs.token}}
           commit-message: 'chore: Update native version'
           branch: prepare_release_native
