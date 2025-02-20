@@ -44,12 +44,19 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+      - uses: actions/checkout@v4
         with:
-          repository_owner: KaleyraVideo
-          repository_name: VideoHybridNativeBridge
-          new_branch_name: update_native
-          access_token: ${{steps.generate_token.outputs.token}}
+          repository: KaleyraVideo/VideoHybridNativeBridge
+          path: videoHybridNativeBridge
+          fetch-depth: 0
+          fetch-tags: true
+          ref: main
+          token: ${{steps.generate_token.outputs.token}}
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          repository: ./videoHybridNativeBridge
+          branch: update_native
+          create_branch: true
 
   update_android_native_version:
     needs: create_branch
