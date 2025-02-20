@@ -54,6 +54,7 @@ jobs:
           token: ${{steps.generate_token.outputs.token}}
       - name: Push branch
         uses: ad-m/github-push-action@master
+        continue-on-error: true
         with:
           github_token:  ${{steps.generate_token.outputs.token}}
           repository: KaleyraVideo/VideoHybridNativeBridge
