@@ -44,11 +44,12 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-      - uses: peterjgrainger/action-create-branch@v2.2.0
-        env:
-            GITHUB_TOKEN: ${{steps.generate_token.outputs.token}}
+      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
         with:
-            branch: 'update_native'
+          repository_owner: KaleyraVideo
+          repository_name: VideoHybridNativeBridge
+          new_branch_name: update_native
+          access_token: ${{steps.generate_token.outputs.token}}
 
   update_android_native_version:
     needs: create_branch
