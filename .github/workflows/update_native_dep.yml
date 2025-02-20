@@ -56,8 +56,9 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token:  ${{steps.generate_token.outputs.token}}
-          repository: ./videoHybridNativeBridge
+          repository: KaleyraVideo/VideoHybridNativeBridge
           branch: update_native
+          directory: ./videoHybridNativeBridge
 
   update_android_native_version:
     needs: create_branch
