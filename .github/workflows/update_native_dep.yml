@@ -52,11 +52,20 @@ jobs:
           fetch-tags: true
           ref: main
           token: ${{steps.generate_token.outputs.token}}
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          repository: ./videoHybridNativeBridge
-          branch: update_native
-          create_branch: true
+      - name: Check if branch update_native exists
+        id: check_branch
+        run: |
+          BRANCH_EXISTS=$(git ls-remote --heads origin update_native)
+          if [ -z "$BRANCH_EXISTS" ]; then
+            echo "branch_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "branch_exists=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Create and push branch update_native
+        if: steps.check_branch.outputs.branch_exists == 'false'
+        run: |
+          git checkout -b update_native
+          git push origin update_native --set-upstream
 
   update_android_native_version:
     needs: create_branch
