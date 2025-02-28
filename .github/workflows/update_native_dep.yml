@@ -37,6 +37,9 @@ on:
 jobs:
   create_branch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # To push a branch 
+      pull-requests: write 
     steps:
       - name: Generate a token
         id: generate_token
