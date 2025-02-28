@@ -55,12 +55,12 @@ class SDKUserInterfacePresenterTest {
         sdkUserInterfacePresenter.startCall(options)
 
         val defaultOptions = Conference.CreationOptions(
-            recordingType = Call.Recording.Type.Never,
+            recordingType = Call.Recording.Type.Automatic,
             callType = Call.Type.audioOnly()
         )
         slot.captured.invoke(defaultOptions)
         assertEquals(Call.Type.audioOnly(), defaultOptions.callType)
-        assertEquals(Call.Recording.Type.Automatic, defaultOptions.recordingType)
+        assertEquals(Call.Recording.automatic(), defaultOptions.recordingType)
         verify { conference.call(userIDs = listOf("callee"), any()) }
     }
 
@@ -85,7 +85,7 @@ class SDKUserInterfacePresenterTest {
         )
         slot.captured.invoke(defaultOptions)
         assertEquals(Call.Type.audioUpgradable(), defaultOptions.callType)
-        assertEquals(Call.Recording.Type.Never, defaultOptions.recordingType)
+        assertEquals(Call.Recording.disabled(), defaultOptions.recordingType)
         verify { conference.call(userIDs = listOf("callee"), any()) }
     }
 
@@ -110,7 +110,7 @@ class SDKUserInterfacePresenterTest {
         )
         slot.captured.invoke(defaultOptions)
         assertEquals(Call.Type.audioVideo(), defaultOptions.callType)
-        assertEquals(Call.Recording.Type.Manual, defaultOptions.recordingType)
+        assertEquals(Call.Recording.manual(), defaultOptions.recordingType)
         verify { conference.call(userIDs = listOf("callee"), any()) }
     }
 
