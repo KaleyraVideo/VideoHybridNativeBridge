@@ -59,7 +59,7 @@ jobs:
         env:
             GITHUB_TOKEN: ${{steps.generate_token.outputs.token}}
         with:
-            branch: 'update_native'
+          branch: 'update_native'
 
   update_android_native_version:
     needs: create_branch
