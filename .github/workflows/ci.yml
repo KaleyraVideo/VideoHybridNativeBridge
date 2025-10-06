@@ -25,7 +25,7 @@ jobs:
           sudo xcode-select -s '/Applications/Xcode_16.1.app/Contents/Developer'
           xcodebuild clean -workspace KaleyraVideoHybridNativeBridge.xcworkspace -scheme KaleyraVideoHybridNativeBridge | xcpretty
           xcrun simctl list runtimes
-          xcodebuild test -workspace KaleyraVideoHybridNativeBridge.xcworkspace -scheme KaleyraVideoHybridNativeBridge -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=18.1"  | xcpretty -t
+          xcodebuild test -workspace KaleyraVideoHybridNativeBridge.xcworkspace -scheme KaleyraVideoHybridNativeBridge -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=18.6"  | xcpretty -t
 
       #- name: Run unit tests iOS 17
       #  working-directory: ./iOS
